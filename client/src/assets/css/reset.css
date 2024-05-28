@@ -51,3 +51,8 @@ legend {
   max-width: 1200px;
   margin: auto;
 }
+
+:root {
+  --main: #49BCC0;
+  
+}
