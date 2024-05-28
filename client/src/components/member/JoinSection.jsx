@@ -26,6 +26,8 @@ const LoginSection = () => {
   };
 
   const register = () => {
+    e.preventDefault();
+
     const addMember = {
       userId: userInfo.userId,
       userPw: userInfo.userPw,
@@ -49,61 +51,61 @@ const LoginSection = () => {
   };
 
   return (
-    <LoginSectionBlock>
+    <LoginSectionBlock className="row">
+      <h1>회원가입</h1>
       <Form onSubmit={register}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>이메일</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter email"
+            placeholder="이메일을 입력하세요."
             name="userId"
             onChange={handleChange}
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>비밀번호</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="비밀번호를 입력하세요."
             name="userPw"
             onChange={handleChange}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>닉네임</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Name"
+            placeholder="닉네임을 입력하세요."
             name="userName"
             onChange={handleChange}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasiczipCode">
-          <Form.Label>zipCode</Form.Label>
+          <Form.Label>우편번호</Form.Label>
           <Form.Control
             type="text"
-            placeholder="zipCode"
+            placeholder=""
             name="zipCode"
             onChange={handleChange}
+            disabled
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicaddr1">
-          <Form.Label>addr1</Form.Label>
+          <Form.Label>주소</Form.Label>
           <Form.Control
             type="text"
-            placeholder="addr1"
+            placeholder=""
             name="addr1"
             onChange={handleChange}
+            disabled
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicaddr2">
-          <Form.Label>addr2</Form.Label>
+          <Form.Label>상세주소</Form.Label>
           <Form.Control
             type="text"
-            placeholder="addr2"
+            placeholder="상세주소를 입력하세요."
             name="addr2"
             onChange={handleChange}
           />

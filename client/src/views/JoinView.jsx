@@ -1,10 +1,10 @@
 import React from "react";
-import LoginSection from "../components/member/LoginSection";
+import JoinSection from "../components/member/JoinSection";
 
 const LoginView = () => {
   return (
     <div>
-      <LoginSection />
+      <JoinSection />
     </div>
   );
 };
