@@ -8,10 +8,18 @@ import { userLogin } from "../../store/member";
 import { useNavigate } from "react-router-dom";
 
 const LoinSectionBlock = styled.div`
+  margin-top: 50px;
+  h1 {
+    text-align: center;
+  }
   .err {
     margin-top: 5px;
     color: #f00;
     font-size: 12px;
+  }
+  .btn-primary {
+    background: #2ac1bc;
+    border: none;
   }
 `;
 

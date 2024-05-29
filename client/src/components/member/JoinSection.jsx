@@ -6,6 +6,10 @@ import styled from "styled-components";
 import axios from "axios";
 
 const LoginSectionBlock = styled.div`
+  margin-top: 50px;
+  h1 {
+    text-align: center;
+  }
   .btn-primary {
     background: #2ac1bc;
     border: none;
@@ -292,7 +296,7 @@ const LoginSection = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          회원가입
         </Button>
       </Form>
     </LoginSectionBlock>
