@@ -150,9 +150,6 @@ const NavBlock = styled.div`
       a {
         display: inline-block;
         font-size: 3em;
-        &.hover {
-          background: green;
-        }
       }
     }
   }
@@ -232,7 +229,6 @@ const Nav = ({ isOpen, toggleMenu }) => {
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0">
                 <Accordion.Header>FamilySite</Accordion.Header>
-
                 <Accordion.Body>
                   <a href="https://www.woowahan.com/" target="_blank">
                     우아한형제들
@@ -255,6 +251,11 @@ const Nav = ({ isOpen, toggleMenu }) => {
                 </Accordion.Body>
                 <Accordion.Body>
                   <a href="https://woowasajangnim.or.kr/" target="_blank">
+                    우아한 사장님 살핌기금
+                  </a>
+                </Accordion.Body>
+                <Accordion.Body>
+                  <a href="https://woowa.janghak.org/" target="_blank">
                     우아한 사장님 자녀 장학금 지원
                   </a>
                 </Accordion.Body>
