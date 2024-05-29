@@ -11,6 +11,56 @@ authRouter.post("/join", (req, res) => {
     [userId, userPw, userName, zipCode, addr1, addr2],
     (err, result) => {
       if (err) {
+        res.status(500).send("회원가입 실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+authRouter.post("/login", (req, res) => {
+  const userId = req.body.userId;
+  const userPw = req.body.userPw;
+  db.query(
+    "SELECT * FROM membertbl WHERE userId=? AND userPw=?",
+    [userId, userPw],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("회원가입 실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+authRouter.post("/idcheck", (req, res) => {
+  const userId = req.body.userId;
+  db.query(
+    "SELECT * FROM membertbl WHERE userId=?",
+    [userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("회원가입 실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+authRouter.post("/namecheck", (req, res) => {
+  const userName = req.body.userName;
+  db.query(
+    "SELECT * FROM membertbl WHERE userName=?",
+    [userName],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("회원가입 실패");
         throw err;
       } else {
         res.send(result);
