@@ -69,4 +69,19 @@ authRouter.post("/namecheck", (req, res) => {
   );
 });
 
+authRouter.post("/refresh", (req, res) => {
+  const userId = req.body.userId;
+  db.query(
+    "SELECT * FROM membertbl WHERE userId=?",
+    [userId],
+    (err, result) => {
+      if (err) {
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 export default authRouter;
