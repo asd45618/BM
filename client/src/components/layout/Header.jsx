@@ -8,7 +8,7 @@ import cn from "classnames";
 import Logoimage from "@/assets/image/logo.png";
 import Nav from "@/components/layout/Nav.jsx";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { userLogout } from "../../store/member";
+import { localUser, userLogout } from "../../store/member";
 
 const HeaderBlock = styled.div`
   background: var(--main);
