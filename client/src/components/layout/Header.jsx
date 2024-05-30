@@ -81,7 +81,7 @@ const HeaderBlock = styled.div`
   }
 
   .menu-wrap.open .line:first-child {
-    transform: rotate(45deg) translateX(25%);
+    transform: rotate(45deg) translateX(29%);
   }
   .menu-wrap.open .line:nth-child(2) {
     opacity: 0;
