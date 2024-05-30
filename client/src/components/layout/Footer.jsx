@@ -75,7 +75,7 @@ const FooterBlock = styled.div`
       .footer__copy {
         span {
           display: block;
-          font-size: 0.8em;
+          font-size: 0.7em;
           color: white;
           font-family: "Noto Sans KR", sans-serif;
           font-optical-sizing: auto;
