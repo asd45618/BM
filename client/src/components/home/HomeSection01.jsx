@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchFood } from "../../store/food";
 
 const HomeSection01Block = styled.section`
   padding-top: 150px;
@@ -104,6 +106,13 @@ const HomeSection01 = () => {
       name: "카페",
     },
   ];
+
+  const dispatch = useDispatch();
+
+  const getFoodList = (category) => {
+    dispatch(fetchFood(category));
+  };
+
   {
     /* <Link to=`/foodlist/${item.foodId}` state:{{ foodId: item.foodId }}>
   
@@ -123,6 +132,7 @@ const 함수이름 = (foodId) => {
             <Link
               to={`/foodList/${item.foodId}`}
               state={{ foodId: item.foodId }}
+              onClick={() => getFoodList(item.foodId)}
             >
               <figure className="imagebox">
                 <img src={item.image} alt={item.alt} />

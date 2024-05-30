@@ -15,6 +15,8 @@ const HeaderBlock = styled.div`
   padding: 30px 15px;
   color: white;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 999;
   .wrap {

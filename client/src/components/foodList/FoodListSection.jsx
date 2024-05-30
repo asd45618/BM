@@ -5,22 +5,22 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchFood } from "../../store/food";
 
-const FoodListSectionBlock = styled.div``;
+const FoodListSectionBlock = styled.div`
+  margin: 150px 0 50px;
+`;
 
 const FoodListSection = () => {
-  const dispatch = useDispatch();
   const params = useParams();
-  const category = params.foodId;
 
   const list = useSelector((state) => state.foods.food);
 
-  useEffect(() => {
-    dispatch(fetchFood(category));
-  }, []);
-
   return (
     <FoodListSectionBlock>
-      <div>{list?.fdName}</div>
+      <div>
+        {list?.map((item) => (
+          <div>{item.fdName}</div>
+        ))}
+      </div>
     </FoodListSectionBlock>
   );
 };
