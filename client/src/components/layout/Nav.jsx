@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Accordion from "react-bootstrap/Accordion";
@@ -155,11 +155,22 @@ const NavBlock = styled.div`
   }
 `;
 
-const Nav = ({ isOpen, toggleMenu }) => {
+const Nav = ({ isOpen, toggleMenu, user }) => {
+  const navigate = useNavigate();
+
   const [depth2, setDepth2] = useState(false);
 
   const depth2Click = () => {
     setDepth2(!depth2);
+  };
+
+  const goToMy = (path) => {
+    if (user) {
+      navigate(`/${path}`);
+    } else {
+      alert("로그인을 해주세요.");
+      navigate("/login");
+    }
   };
 
   return (
@@ -198,28 +209,28 @@ const Nav = ({ isOpen, toggleMenu }) => {
             </span>
             <ul className={cn("nav__depth2", depth2 ? "on" : "")}>
               <li onClick={toggleMenu}>
-                <NavLink to="/memberModify">
+                <a onClick={() => goToMy("memberModify")}>
                   정보수정
                   <span>
                     <FaUser />
                   </span>
-                </NavLink>
+                </a>
               </li>
               <li onClick={toggleMenu}>
-                <NavLink to="/">
+                <a onClick={() => goToMy("memberModify")}>
                   좋아요 리스트
                   <span>
                     <FaHeart />
                   </span>
-                </NavLink>
+                </a>
               </li>
               <li onClick={toggleMenu}>
-                <NavLink to="/">
+                <a onClick={() => goToMy("memberModify")}>
                   최근 본 음식
                   <span>
                     <FaBowlFood />
                   </span>
-                </NavLink>
+                </a>
               </li>
             </ul>
           </li>

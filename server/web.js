@@ -20,6 +20,7 @@ app.use(cors(corsOptions));
 app.use(express.json()); // 사용자의 json 요청을 처리하여 req.body 객체에 저장해줌
 
 import authRouter from "./routers/authRouter.js";
+import foodRouter from "./routers/foodRouter.js";
 // import boardRouter from "./routers/boardRouter.js";
 // import productRouter from "./routers/productRouter.js";
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, "build")));
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/auth", authRouter);
+app.use("/food", foodRouter);
 // app.use("/board", boardRouter);
 // app.use("/product", productRouter);
 

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const LoginSectionBlock = styled.div`
-  margin-top: 50px;
+  margin: 50px 0;
   h1 {
     text-align: center;
   }

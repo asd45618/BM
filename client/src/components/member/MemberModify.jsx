@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { localUser } from "../../store/member";
+import { localUser, userLogout } from "../../store/member";
 
 const MemberModifyBlock = styled.div`
   margin: 50px 0;
@@ -19,6 +19,16 @@ const MemberModifyBlock = styled.div`
     border: 1px solid #ddd;
     &.err {
       border-color: #f00;
+    }
+  }
+
+  .btn {
+    display: flex;
+    justify-content: right;
+    .btn-primary {
+      background: #2ac1bc;
+      border: none;
+      margin-right: 10px;
     }
   }
 `;
@@ -85,6 +95,26 @@ const MemberModify = () => {
           })
           .catch((err) => console.log(err))
       : setNameMessage("닉네임을 입력해주세요.");
+  };
+
+  const memberRemove = () => {
+    const answer = confirm("정말 탈퇴하시겠습니까?");
+    if (answer) {
+      axios
+        .post("http://localhost:8001/auth/remove", { userId: userInfo.userId })
+        .then((res) => {
+          if (res.data.affectedRows === 1) {
+            dispatch(userLogout());
+            navigate("/");
+          } else {
+            alert("회원탈퇴에 실패했습니다.");
+            return;
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
@@ -207,9 +237,14 @@ const MemberModify = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          정보 수정
-        </Button>
+        <div className="btn">
+          <Button variant="primary" type="submit">
+            정보 수정
+          </Button>
+          <Button variant="danger" type="button" onClick={memberRemove}>
+            회원 탈퇴
+          </Button>
+        </div>
       </Form>
     </MemberModifyBlock>
   );

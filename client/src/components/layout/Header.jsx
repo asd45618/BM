@@ -14,6 +14,9 @@ const HeaderBlock = styled.div`
   background: var(--main);
   padding: 30px 15px;
   color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   .wrap {
     display: flex;
     justify-content: space-between;
@@ -154,7 +157,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Nav isOpen={isOpen} toggleMenu={toggleMenu} />
+      <Nav isOpen={isOpen} toggleMenu={toggleMenu} user={user} />
     </HeaderBlock>
   );
 };

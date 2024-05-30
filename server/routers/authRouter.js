@@ -101,4 +101,16 @@ authRouter.post("/modify", (req, res) => {
   );
 });
 
+authRouter.post("/remove", (req, res) => {
+  const userId = req.body.userId;
+  db.query("DELETE FROM membertbl WHERE userId=?", [userId], (err, result) => {
+    if (err) {
+      res.status(500).send("실패");
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 export default authRouter;
