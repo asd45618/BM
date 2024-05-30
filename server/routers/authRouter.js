@@ -76,6 +76,23 @@ authRouter.post("/refresh", (req, res) => {
     [userId],
     (err, result) => {
       if (err) {
+        res.status(500).send("실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+authRouter.post("/modify", (req, res) => {
+  const { userId, userPw, userName, zipCode, addr1, addr2 } = req.body.userInfo;
+  db.query(
+    "UPDATE membertbl SET userId=?, userName=?, zipCode=?, addr1=?, addr2=? WHERE userId=?",
+    [userId, userName, zipCode, addr1, addr2, userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("실패");
         throw err;
       } else {
         res.send(result);
