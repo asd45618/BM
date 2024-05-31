@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { localUser, userLogout } from "../../store/member";
 
 const MemberModifyBlock = styled.div`
-  margin: 50px 0;
+  margin: 150px 0 50px;
 
   .dupliErr {
     color: red;

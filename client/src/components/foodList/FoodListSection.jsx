@@ -30,6 +30,7 @@ const FoodListSectionBlock = styled.div`
           flex: 0 0 30%;
           margin-right: 15px;
           margin-bottom: 0;
+          cursor: pointer;
           img {
             border-radius: 25px;
           }
@@ -101,6 +102,12 @@ const FoodListSection = () => {
     }
   };
 
+  const goToDetail = (item) => {
+    navgiate(`/foodDetail/${item.fdCategory}/${item.fdNo}`, {
+      state: { item: item },
+    });
+  };
+
   useEffect(() => {
     user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
   }, [user]);
@@ -114,7 +121,7 @@ const FoodListSection = () => {
         {list?.map((item) => (
           <li key={item.fdNo}>
             <div className="info__wrapper">
-              <Figure>
+              <Figure onClick={() => goToDetail(item)}>
                 <Figure.Image
                   width={130}
                   height={130}

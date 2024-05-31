@@ -9,6 +9,7 @@ import Logoimage from "@/assets/image/logo.png";
 import Nav from "@/components/layout/Nav.jsx";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { localUser, userLogout } from "../../store/member";
+import { fetchLikeFood } from "../../store/food";
 
 const HeaderBlock = styled.div`
   background: var(--main);
@@ -123,7 +124,8 @@ const Header = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [dispatch]);
+    user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
+  }, [dispatch, user]);
 
   return (
     <HeaderBlock>

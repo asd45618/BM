@@ -1,5 +1,6 @@
 import express from "express";
 import { db } from "../db.js";
+import dayjs from "dayjs";
 
 const foodRouter = express.Router();
 
@@ -100,6 +101,66 @@ foodRouter.get("/allLike", (req, res) => {
   const userId = req.query.userId;
   const query =
     "SELECT l.userId, f.* FROM liketbl AS l JOIN foodtbl AS f ON l.fdNo = f.fdNo WHERE l.userId = ?";
+  db.query(query, [userId], (err, result) => {
+    if (err) {
+      res.status(500).send("실패");
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+foodRouter.post("/recent", (req, res) => {
+  const { fdNo, userId } = req.body;
+  const date = dayjs();
+  const MAX_RECENTLY_VIEWED = 5;
+  const query =
+    "INSERT INTO recenttbl (fdNo, userId, date) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE date = ?";
+  db.query(
+    query,
+    [
+      fdNo,
+      userId,
+      date.format("YYYY-MM-DD HH:mm:ss"),
+      date.format("YYYY-MM-DD HH:mm:ss"),
+    ],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("실패");
+        throw err;
+      } else {
+        db.query(
+          "SELECT COUNT(*) as count FROM recenttbl WHERE userId = ?",
+          [userId],
+          (countErr, countResult) => {
+            if (countErr) {
+              res.status(500).send("실패");
+              throw err;
+            } else {
+              console.log(countResult[0].count);
+              const count = countResult[0].count;
+              if (count > MAX_RECENTLY_VIEWED) {
+                db.query(
+                  `DELETE FROM recenttbl
+                   WHERE userId = ?
+                   ORDER BY date ASC
+                   LIMIT ?`,
+                  [userId, count - MAX_RECENTLY_VIEWED]
+                );
+              }
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+foodRouter.get("/recentList", (req, res) => {
+  const userId = req.query.userId;
+  const query =
+    "SELECT r.userId, f.* FROM recenttbl AS r JOIN foodtbl AS f ON r.fdNo = f.fdNo WHERE r.userId = ?";
   db.query(query, [userId], (err, result) => {
     if (err) {
       res.status(500).send("실패");

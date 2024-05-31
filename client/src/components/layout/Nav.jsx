@@ -224,7 +224,7 @@ const Nav = ({ isOpen, toggleMenu, user }) => {
                 </a>
               </li>
               <li onClick={toggleMenu}>
-                <a onClick={() => goToMy("memberModify")}>
+                <a onClick={() => goToMy("recentFood")}>
                   최근 본 음식
                   <span>
                     <FaBowlFood />

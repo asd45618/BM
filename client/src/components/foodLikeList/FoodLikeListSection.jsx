@@ -30,6 +30,7 @@ const FoodLikeListSectionBlock = styled.div`
           flex: 0 0 30%;
           margin-right: 15px;
           margin-bottom: 0;
+          cursor: pointer;
           img {
             border-radius: 25px;
           }
@@ -100,6 +101,12 @@ const FoodLikeListSection = () => {
     }
   };
 
+  const goToDetail = (item) => {
+    navgiate(`/foodDetail/${item.fdCategory}/${item.fdNo}`, {
+      state: { item: item },
+    });
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8001/food/allLike?userId=${user.userId}`)
@@ -119,7 +126,7 @@ const FoodLikeListSection = () => {
         {userLikeList?.map((item) => (
           <li key={item.fdNo}>
             <div className="info__wrapper">
-              <Figure>
+              <Figure onClick={() => goToDetail(item)}>
                 <Figure.Image
                   width={130}
                   height={130}

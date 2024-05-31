@@ -7,6 +7,7 @@ const foodSlice = createSlice({
     allFood: null,
     food: null, // { fdNo, fdName, fdDescription, fdImg, fdCategory }
     likeFood: null,
+    recentList: null,
   },
   reducers: {
     initAllFoods(state, action) {
@@ -18,10 +19,14 @@ const foodSlice = createSlice({
     initLikeFoods(state, action) {
       state.likeFood = action.payload;
     },
+    initRecent(state, action) {
+      state.recentList = action.payload;
+    },
   },
 });
 
-export const { initAllFoods, initFoods, initLikeFoods } = foodSlice.actions;
+export const { initAllFoods, initFoods, initLikeFoods, initRecent } =
+  foodSlice.actions;
 
 export const fetchAllFood = () => (dispatch) => {
   axios
@@ -44,7 +49,15 @@ export const fetchLikeFood = (userId) => (dispatch) => {
     .get(`http://localhost:8001/food/like?userId=${userId}`)
     .then((res) => {
       dispatch(initLikeFoods(res.data));
-      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const fetchRecent = (userId) => (dispatch) => {
+  axios
+    .get(`http://localhost:8001/food/recentList?userId=${userId}`)
+    .then((res) => {
+      dispatch(initRecent(res.data));
     })
     .catch((err) => console.log(err));
 };
