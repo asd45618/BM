@@ -87,14 +87,15 @@ const HomeSection02 = () => {
   const options = {
     dots: false,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 0,
+    speed: 3000,
     slidesToShow: 2,
-    slidesToScroll: 2,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    infinite: true,
+    slidesToScroll: 1,
+    cssEase: "linear",
     pauseOnHover: true,
-    arrows: false,
     centerMode: true,
+    arrows: false,
   };
 
   useEffect(() => {

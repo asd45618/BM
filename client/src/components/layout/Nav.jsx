@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
-// import Dropdown from 'react-bootstrap/Dropdown';
 import Accordion from "react-bootstrap/Accordion";
 import { CiFacebook, CiInstagram, CiTwitter } from "react-icons/ci";
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
