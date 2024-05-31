@@ -139,7 +139,7 @@ const Header = () => {
           {user ? (
             <div className="logout">
               <p onClick={logoutClick}>로그아웃</p>
-              <Link to="/">
+              <Link to="/memberModify">
                 <FontAwesomeIcon icon={faUser} /> ({user.userName})
               </Link>
             </div>

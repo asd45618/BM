@@ -138,7 +138,7 @@ const 함수이름 = (foodId) => {
           <li key={index}>
             <Link
               to={`/foodList/${item.foodId}`}
-              state={{ foodId: item.foodId }}
+              state={{ category: item.name }}
               onClick={() => getFoodList(item.foodId)}
             >
               <figure className="imagebox">

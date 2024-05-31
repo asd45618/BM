@@ -111,7 +111,6 @@ const FoodLikeListSection = () => {
     axios
       .get(`http://localhost:8001/food/allLike?userId=${user.userId}`)
       .then((res) => {
-        console.log(res);
         setUserLikeList(res.data);
       })
       .catch((err) => console.log(err));

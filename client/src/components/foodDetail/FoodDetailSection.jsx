@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Figure from "react-bootstrap/Figure";
+import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { fetchLikeFood } from "../../store/food";
+import { useNavigate } from "react-router-dom";
 
 const FoodDetailSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -16,11 +18,10 @@ const FoodDetailSectionBlock = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 10px;
-    .figure {
-      flex: 0 0 30%;
+    .card {
       margin-right: 15px;
       margin-bottom: 0;
-      cursor: pointer;
+      border-radius: 25px;
       img {
         border-radius: 25px;
       }
@@ -61,11 +62,34 @@ const FoodDetailSectionBlock = styled.div`
 `;
 
 const FoodDetailSection = ({ item }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.members.user);
   const like = useSelector((state) => state.foods.likeFood);
 
-  console.log(item);
-  const { fdName, fdKrCategory, fdImg, fdDescription } = item;
+  const { fdNo, fdName, fdKrCategory, fdImg, fdDescription } = item;
+
+  const clickLikeBtn = (item) => {
+    if (user) {
+      axios
+        .post("http://localhost:8001/food/likeClick", {
+          fdNo: item,
+          userId: user.userId,
+        })
+        .then((res) => {
+          if (res.data.affectedRows === 1) {
+            dispatch(fetchLikeFood(user.userId));
+          } else {
+            alert("좋아요 실패");
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("로그인해 주세요.");
+      navgiate("/login");
+    }
+  };
 
   useEffect(() => {
     axios
@@ -80,25 +104,27 @@ const FoodDetailSection = ({ item }) => {
   return (
     <FoodDetailSectionBlock>
       <div className="detail__wrapper">
-        <Figure>
-          <Figure.Image width={171} height={180} alt="171x180" src={fdImg} />
-        </Figure>
         <div className="text__wrapper">
           <div className="info">
             <div className="text">
-              <h2>{item.fdName}</h2>
-              <span>{item.fdKrCategory}</span>
+              <h2>{fdName}</h2>
+              <span>{fdKrCategory}</span>
             </div>
-            <p>{item.fdDescription}</p>
           </div>
         </div>
         <div className="like__btn">
           <FontAwesomeIcon
             icon={faHeart}
-            onClick={() => clickLikeBtn(item.fdNo)}
-            className={like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""}
+            onClick={() => clickLikeBtn(fdNo)}
+            className={like?.find((val) => val.fdNo === fdNo) ? "on" : ""}
           />
         </div>
+        <Card>
+          <Card.Img variant="top" src={fdImg} />
+          <Card.Body>
+            <Card.Text>{fdDescription}</Card.Text>
+          </Card.Body>
+        </Card>
       </div>
     </FoodDetailSectionBlock>
   );

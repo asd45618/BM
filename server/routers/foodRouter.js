@@ -160,7 +160,7 @@ foodRouter.post("/recent", (req, res) => {
 foodRouter.get("/recentList", (req, res) => {
   const userId = req.query.userId;
   const query =
-    "SELECT r.userId, f.* FROM recenttbl AS r JOIN foodtbl AS f ON r.fdNo = f.fdNo WHERE r.userId = ?";
+    "SELECT r.userId, f.* FROM recenttbl AS r JOIN foodtbl AS f ON r.fdNo = f.fdNo WHERE r.userId = ? ORDER BY date DESC";
   db.query(query, [userId], (err, result) => {
     if (err) {
       res.status(500).send("실패");

@@ -72,7 +72,7 @@ const FoodListSectionBlock = styled.div`
   }
 `;
 
-const FoodListSection = () => {
+const FoodListSection = ({ category }) => {
   const params = useParams();
   const dispatch = useDispatch();
   const navgiate = useNavigate();
@@ -115,7 +115,7 @@ const FoodListSection = () => {
   return (
     <FoodListSectionBlock>
       <div className="h1__tag">
-        <h1>한식</h1>
+        <h1>{category}</h1>
       </div>
       <ul>
         {list?.map((item) => (
