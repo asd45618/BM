@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Figure from "react-bootstrap/Figure";
 import axios from "axios";
 import { fetchLikeFood } from "../../store/food";
+import { useNavigate } from "react-router-dom";
 
-const FoodListSectionBlock = styled.div`
-  margin: 130px 0 50px;
+const FoodLikeListSectionBlock = styled.div`
+  margin: 150px 0 50px;
   padding: 0 30px;
   font-family: var(--m-f-m);
   .h1__tag {
@@ -71,14 +71,13 @@ const FoodListSectionBlock = styled.div`
   }
 `;
 
-const FoodListSection = () => {
-  const params = useParams();
+const FoodLikeListSection = () => {
   const dispatch = useDispatch();
   const navgiate = useNavigate();
 
-  const list = useSelector((state) => state.foods.food);
-  const user = useSelector((state) => state.members.user);
   const like = useSelector((state) => state.foods.likeFood);
+  const user = useSelector((state) => state.members.user);
+  const [userLikeList, setUserLikeList] = useState([]);
 
   const clickLikeBtn = (item) => {
     if (user) {
@@ -102,16 +101,22 @@ const FoodListSection = () => {
   };
 
   useEffect(() => {
-    user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
-  }, [user]);
+    axios
+      .get(`http://localhost:8001/food/allLike?userId=${user.userId}`)
+      .then((res) => {
+        console.log(res);
+        setUserLikeList(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <FoodListSectionBlock>
+    <FoodLikeListSectionBlock>
       <div className="h1__tag">
-        <h1>한식</h1>
+        <h1>좋아요</h1>
       </div>
       <ul>
-        {list?.map((item) => (
+        {userLikeList?.map((item) => (
           <li key={item.fdNo}>
             <div className="info__wrapper">
               <Figure>
@@ -142,8 +147,8 @@ const FoodListSection = () => {
           </li>
         ))}
       </ul>
-    </FoodListSectionBlock>
+    </FoodLikeListSectionBlock>
   );
 };
 
-export default FoodListSection;
+export default FoodLikeListSection;

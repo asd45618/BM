@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Figure from "react-bootstrap/Figure";
-import axios from "axios";
-import { fetchLikeFood } from "../../store/food";
+import { useSelector } from "react-redux";
 
-const FoodListSectionBlock = styled.div`
-  margin: 130px 0 50px;
+const RecentFoodSectionBlock = styled.div`
+  margin: 150px 0 50px;
   padding: 0 30px;
   font-family: var(--m-f-m);
   .h1__tag {
@@ -71,42 +68,12 @@ const FoodListSectionBlock = styled.div`
   }
 `;
 
-const FoodListSection = () => {
-  const params = useParams();
-  const dispatch = useDispatch();
-  const navgiate = useNavigate();
-
+const RecentFoodSection = () => {
   const list = useSelector((state) => state.foods.food);
-  const user = useSelector((state) => state.members.user);
   const like = useSelector((state) => state.foods.likeFood);
 
-  const clickLikeBtn = (item) => {
-    if (user) {
-      axios
-        .post("http://localhost:8001/food/likeClick", {
-          fdNo: item,
-          userId: user.userId,
-        })
-        .then((res) => {
-          if (res.data.affectedRows === 1) {
-            dispatch(fetchLikeFood(user.userId));
-          } else {
-            alert("좋아요 실패");
-          }
-        })
-        .catch((err) => console.log(err));
-    } else {
-      alert("로그인해 주세요.");
-      navgiate("/login");
-    }
-  };
-
-  useEffect(() => {
-    user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
-  }, [user]);
-
   return (
-    <FoodListSectionBlock>
+    <RecentFoodSectionBlock>
       <div className="h1__tag">
         <h1>한식</h1>
       </div>
@@ -132,7 +99,7 @@ const FoodListSection = () => {
               <div className="like__btn">
                 <FontAwesomeIcon
                   icon={faHeart}
-                  onClick={() => clickLikeBtn(item.fdNo)}
+                  //   onClick={() => clickLikeBtn(item.fdNo)}
                   className={
                     like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""
                   }
@@ -142,8 +109,8 @@ const FoodListSection = () => {
           </li>
         ))}
       </ul>
-    </FoodListSectionBlock>
+    </RecentFoodSectionBlock>
   );
 };
 
-export default FoodListSection;
+export default RecentFoodSection;

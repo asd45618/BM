@@ -35,7 +35,6 @@ export const fetchFood = (fdCategory) => (dispatch) => {
     .get(`http://localhost:8001/food/list?fdCategory=${fdCategory}`)
     .then((res) => {
       dispatch(initFoods(res.data));
-      console.log(res.data);
     })
     .catch((err) => console.log(err));
 };
@@ -43,7 +42,10 @@ export const fetchFood = (fdCategory) => (dispatch) => {
 export const fetchLikeFood = (userId) => (dispatch) => {
   axios
     .get(`http://localhost:8001/food/like?userId=${userId}`)
-    .then((res) => dispatch(initLikeFoods(res.data)))
+    .then((res) => {
+      dispatch(initLikeFoods(res.data));
+      console.log(res.data);
+    })
     .catch((err) => console.log(err));
 };
 
