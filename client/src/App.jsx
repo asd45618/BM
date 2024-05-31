@@ -7,6 +7,7 @@ import JoinView from "./views/JoinView";
 import LoginView from "./views/LoginView";
 import MemberModifyView from "./views/MemberModifyView";
 import FoodListSection from "./components/foodList/FoodListSection";
+import AboutUsView from "./views/AboutUsView";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<LoginView />} />
         <Route path="/memberModify" element={<MemberModifyView />} />
         <Route path="/foodlist/:foodId" element={<FoodListSection />} />
+        <Route path="/aboutus" element={<AboutUsView />} />
       </Route>
     </Routes>
   );
