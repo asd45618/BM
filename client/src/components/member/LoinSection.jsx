@@ -8,7 +8,7 @@ import { userLogin } from "../../store/member";
 import { useNavigate } from "react-router-dom";
 
 const LoinSectionBlock = styled.div`
-  margin: 50px 0;
+  margin: 150px 0 50px;
   h1 {
     text-align: center;
   }

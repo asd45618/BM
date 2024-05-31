@@ -41,4 +41,33 @@ foodRouter.get("/list", (req, res) => {
   }
 });
 
+foodRouter.post("/likeClick", (req, res) => {
+  console.log(res.body);
+  const { fdNo, userId } = req.body;
+  db.query(
+    "INSERT INTO liketbl (fdNo, userId) VALUES (?, ?)",
+    [fdNo, userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+foodRouter.get("/like", (req, res) => {
+  const userId = req.query.userId;
+  db.query("SELECT * FROM liketbl WHERE userId=?", [userId], (err, result) => {
+    if (err) {
+      res.status(500).send("실패");
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 export default foodRouter;

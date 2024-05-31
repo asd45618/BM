@@ -6,6 +6,7 @@ const foodSlice = createSlice({
   initialState: {
     allFood: null,
     food: null, // { fdNo, fdName, fdDescription, fdImg, fdCategory }
+    likeFood: null,
   },
   reducers: {
     initAllFoods(state, action) {
@@ -14,10 +15,13 @@ const foodSlice = createSlice({
     initFoods(state, action) {
       state.food = action.payload;
     },
+    initLikeFoods(state, action) {
+      state.likeFood = action.payload;
+    },
   },
 });
 
-export const { initAllFoods, initFoods } = foodSlice.actions;
+export const { initAllFoods, initFoods, initLikeFoods } = foodSlice.actions;
 
 export const fetchAllFood = () => (dispatch) => {
   axios
@@ -30,6 +34,13 @@ export const fetchFood = (fdCategory) => (dispatch) => {
   axios
     .get(`http://localhost:8001/food/list?fdCategory=${fdCategory}`)
     .then((res) => dispatch(initFoods(res.data)))
+    .catch((err) => console.log(err));
+};
+
+export const fetchLikeFood = (userId) => (dispatch) => {
+  axios
+    .get(`http://localhost:8001/food/like?userId=${userId}`)
+    .then((res) => dispatch(initLikeFoods(res.data)))
     .catch((err) => console.log(err));
 };
 
