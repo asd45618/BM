@@ -33,7 +33,10 @@ export const fetchAllFood = () => (dispatch) => {
 export const fetchFood = (fdCategory) => (dispatch) => {
   axios
     .get(`http://localhost:8001/food/list?fdCategory=${fdCategory}`)
-    .then((res) => dispatch(initFoods(res.data)))
+    .then((res) => {
+      dispatch(initFoods(res.data));
+      console.log(res.data);
+    })
     .catch((err) => console.log(err));
 };
 

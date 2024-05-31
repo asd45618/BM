@@ -11,9 +11,15 @@ const HomeSection01Block = styled.section`
     font-size: 3em;
     font-family: var(--m-f-m);
     text-align: center;
-    padding-bottom: 30px;
   }
-  .foodDepth1 {
+  span {
+    border-bottom: 2px solid var(--main);
+    width: 40px;
+    display: flex;
+    text-align: center;
+    margin: 30px auto;
+  }
+  .food__Depth1 {
     align-items: center;
     display: grid;
     gap: 50px;
@@ -126,7 +132,8 @@ const 함수이름 = (foodId) => {
   return (
     <HomeSection01Block>
       <h1>음식리스트</h1>
-      <ul className="foodDepth1">
+      <span></span>
+      <ul className="food__Depth1">
         {foodList.map((item, index) => (
           <li key={index}>
             <Link
