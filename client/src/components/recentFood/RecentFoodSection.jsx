@@ -109,6 +109,9 @@ const RecentFoodSection = () => {
 
   useEffect(() => {
     dispatch(fetchRecent(user?.userId));
+    user
+      ? dispatch(fetchLikeFood(user?.userId))
+      : dispatch(fetchLikeFood(null));
   }, [user]);
 
   return (

@@ -126,7 +126,6 @@ const Header = () => {
         })
         .catch((err) => console.log(err));
     }
-    dispatch(fetchLikeFood(user?.userId));
   }, [dispatch]);
 
   return (

@@ -114,6 +114,9 @@ const FoodLikeListSection = () => {
         setUserLikeList(res.data);
       })
       .catch((err) => console.log(err));
+    user
+      ? dispatch(fetchLikeFood(user?.userId))
+      : dispatch(fetchLikeFood(null));
   }, []);
 
   return (
