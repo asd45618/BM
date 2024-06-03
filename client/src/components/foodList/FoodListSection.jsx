@@ -39,11 +39,14 @@ const FoodListSectionBlock = styled.div`
           flex: 0 0 50%;
           .text {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             margin-bottom: 3px;
             h2 {
+              flex: 0 0 80%;
               margin-right: 10px;
               margin-bottom: 0;
+              word-break: keep-all;
             }
             span {
             }

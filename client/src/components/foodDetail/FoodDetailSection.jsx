@@ -39,8 +39,10 @@ const FoodDetailSectionBlock = styled.div`
           }
         }
         .text__des {
+          margin: 0 10px;
           color: #aaa;
           font-size: 16px;
+          word-break: keep-all;
         }
       }
     }
