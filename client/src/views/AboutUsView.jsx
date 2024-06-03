@@ -3,7 +3,7 @@ import AboutUsSection from "@/components/aboutUs/AboutUsSection";
 
 const AboutUsView = () => {
   return (
-    <div>
+    <div style={{ background: "var(--main)" }}>
       <AboutUsSection />
     </div>
   );
