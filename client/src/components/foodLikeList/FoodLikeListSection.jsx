@@ -45,7 +45,6 @@ const FoodLikeListSectionBlock = styled.div`
               margin-right: 10px;
               flex: 0 0 70%;
               margin-bottom: 0;
-              word-break: keep-all;
             }
             span {
             }
