@@ -63,7 +63,7 @@ const FoodListSectionBlock = styled.div`
           svg {
             cursor: pointer;
             &.on {
-              color: pink;
+              color: #fa5252;
             }
           }
         }

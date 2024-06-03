@@ -107,6 +107,8 @@ const Header = () => {
 
   const logoutClick = () => {
     dispatch(userLogout());
+    dispatch(localUser(null));
+    console.log(user);
     navigate("/");
   };
 
@@ -124,8 +126,8 @@ const Header = () => {
         })
         .catch((err) => console.log(err));
     }
-    user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
-  }, [dispatch, user]);
+    dispatch(fetchLikeFood(user?.userId));
+  }, [dispatch]);
 
   return (
     <HeaderBlock>

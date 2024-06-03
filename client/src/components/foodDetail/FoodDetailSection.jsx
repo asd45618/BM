@@ -2,50 +2,49 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Card from "react-bootstrap/Card";
+import Image from "react-bootstrap/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { fetchLikeFood } from "../../store/food";
 import { useNavigate } from "react-router-dom";
 
 const FoodDetailSectionBlock = styled.div`
-  margin: 150px 0 50px;
-  padding: 0 30px;
+  margin: 106px 0 50px;
   font-family: var(--m-f-m);
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
+  text-align: center;
   .detail__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     padding-bottom: 10px;
-    .card {
-      margin-right: 15px;
-      margin-bottom: 0;
-      border-radius: 25px;
-      img {
-        border-radius: 25px;
-      }
+    img {
+      width: 100%;
+      height: 100%;
     }
     .info {
-      flex: 0 0 50%;
       .text {
-        display: flex;
-        align-items: center;
-        margin-bottom: 3px;
+        margin: 10px 0 30px;
+        p {
+          margin-bottom: 0.7rem;
+        }
         h2 {
-          margin-right: 10px;
+          font-size: 36px;
           margin-bottom: 0;
         }
-        span {
+        .bar__wrapper {
+          display: flex;
+          justify-content: center;
+          margin: 20px 0;
+          .bar {
+            width: 30px;
+            border: 1px solid #ddd;
+          }
         }
-      }
-      p {
-        color: #aaa;
-        font-size: 14px;
+        .text__des {
+          color: #aaa;
+          font-size: 16px;
+        }
       }
     }
     .like__btn {
-      flex: 0 0 15%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -54,7 +53,7 @@ const FoodDetailSectionBlock = styled.div`
       svg {
         cursor: pointer;
         &.on {
-          color: pink;
+          color: #fa5252;
         }
       }
     }
@@ -87,28 +86,35 @@ const FoodDetailSection = ({ item }) => {
         .catch((err) => console.log(err));
     } else {
       alert("로그인해 주세요.");
-      navgiate("/login");
+      navigate("/login");
     }
   };
 
   useEffect(() => {
-    axios
-      .post("http://localhost:8001/food/recent", {
-        fdNo: item.fdNo,
-        userId: user?.userId,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post("http://localhost:8001/food/recent", {
+          fdNo: item.fdNo,
+          userId: user?.userId,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
     <FoodDetailSectionBlock>
       <div className="detail__wrapper">
+        <Image src={fdImg} fluid />
         <div className="text__wrapper">
           <div className="info">
             <div className="text">
+              <p>{fdKrCategory}</p>
               <h2>{fdName}</h2>
-              <span>{fdKrCategory}</span>
+              <div className="bar__wrapper">
+                <div className="bar"></div>
+              </div>
+              <p className="text__des">{fdDescription}</p>
             </div>
           </div>
         </div>
@@ -119,12 +125,6 @@ const FoodDetailSection = ({ item }) => {
             className={like?.find((val) => val.fdNo === fdNo) ? "on" : ""}
           />
         </div>
-        <Card>
-          <Card.Img variant="top" src={fdImg} />
-          <Card.Body>
-            <Card.Text>{fdDescription}</Card.Text>
-          </Card.Body>
-        </Card>
       </div>
     </FoodDetailSectionBlock>
   );

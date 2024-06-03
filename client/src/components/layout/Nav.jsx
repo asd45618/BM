@@ -236,7 +236,7 @@ const Nav = ({ isOpen, toggleMenu, user }) => {
         </ul>
         <div className="Family__site">
           <div className="Family__list">
-            <Accordion defaultActiveKey="0">
+            <Accordion defaultActiveKey="1">
               <Accordion.Item eventKey="0">
                 <Accordion.Header>FamilySite</Accordion.Header>
                 <Accordion.Body>
