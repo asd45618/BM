@@ -41,10 +41,9 @@ const FoodLikeListSectionBlock = styled.div`
             display: flex;
             align-items: center;
             margin-bottom: 3px;
-            flex-wrap: wrap;
             h2 {
               margin-right: 10px;
-              flex: 0 0 80%;
+              flex: 0 0 70%;
               margin-bottom: 0;
               word-break: keep-all;
             }

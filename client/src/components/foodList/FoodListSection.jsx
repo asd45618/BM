@@ -43,10 +43,9 @@ const FoodListSectionBlock = styled.div`
             align-items: center;
             margin-bottom: 3px;
             h2 {
-              flex: 0 0 80%;
+              flex: 0 0 70%;
               margin-right: 10px;
               margin-bottom: 0;
-              word-break: keep-all;
             }
             span {
             }
