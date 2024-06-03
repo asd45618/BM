@@ -185,7 +185,7 @@ const Nav = ({ isOpen, toggleMenu, user }) => {
             </NavLink>
           </li>
           <li onClick={toggleMenu}>
-            <NavLink to="/">
+            <NavLink to="/service">
               서비스{" "}
               <span>
                 <IoIosArrowForward />
