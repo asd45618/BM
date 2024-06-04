@@ -19,6 +19,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@gsap/react": "^2.1.1",
+    "gsap": "^3.12.5",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1"
   }

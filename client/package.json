@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
+    "gsap": "^3.12.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
@@ -26,6 +27,7 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@gsap/react": "^2.1.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
