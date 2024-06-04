@@ -117,7 +117,9 @@ const HomeSection02 = () => {
             key={item.id}
             className="slide"
             onClick={() =>
-              navigate(`/foodDetail/${item.fdCategory}/${item.fdNo}`)
+              navigate(`/foodDetail/${item.fdCategory}/${item.fdNo}`, {
+                state: { item },
+              })
             }
           >
             <figure className="HomeSection2__imagebox">

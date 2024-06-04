@@ -14,6 +14,7 @@ import FoodDetailView from "./views/FoodDetailView";
 import ServiceView from "./views/ServiceView";
 import FoodRecommendView from "./views/FoodRecommendView";
 import RouletteView from "./views/RouletteView";
+import WayToComeView from "./views/WayToComeView";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
         <Route path="/foodlist/:foodId" element={<FoodListView />} />
         <Route path="/aboutus" element={<AboutUsView />} />
         <Route path="/service" element={<ServiceView />} />
-        <Route path="/likeList" element={<FoodLikeListView />} />
+        <Route path="/way" element={<WayToComeView />} />
+        <Route path="/likeList" element={<FoodLikeListView />} />{" "}
         <Route path="/recentFood" element={<RecentFoodView />} />
         <Route path="/foodDetail/:category/:no" element={<FoodDetailView />} />
         <Route path="/foodRecommend" element={<FoodRecommendView />} />
