@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styled from "styled-components";
 import axios from "axios";
+import { FaUserPlus } from "react-icons/fa6";
 
 const LoginSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -33,6 +34,63 @@ const LoginSectionBlock = styled.div`
     border: 1px solid #ddd;
     &.err {
       border-color: #f00;
+    }
+  }
+  .join__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    P {
+      font-size: 5em;
+      color: var(--main);
+    }
+    h1 {
+      font-size: 3em;
+      font-family: var(--m-f-n);
+      font-weight: 400;
+      color: #424242;
+    }
+  }
+  .form-control {
+    padding: 15px;
+    border: none;
+    background: #f5f5f5;
+    border: 1px solid white;
+    &:focus {
+      border: 1px solid var(--main);
+      box-shadow: none;
+      background: #fff;
+    }
+  }
+  .btn-secondary {
+    background: transparent;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    font-family: var(--m-f-n);
+    font-weight: bold;
+    &:hover {
+      background: #6c757d;
+      color: white;
+    }
+  }
+  .btn-primary {
+    width: 100%;
+    border: 1px solid var(--main);
+    background: transparent;
+    color: var(--main);
+    font-family: var(--m-f-n);
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+    &:hover {
+      background: var(--main);
+      color: white;
     }
   }
 `;
@@ -190,7 +248,12 @@ const LoginSection = () => {
 
   return (
     <LoginSectionBlock className="row">
-      <h1>회원가입</h1>
+      <div className="join__text">
+        <p>
+          <FaUserPlus />
+        </p>
+        <h1>회원가입</h1>
+      </div>
       <Form onSubmit={register}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>이메일</Form.Label>
