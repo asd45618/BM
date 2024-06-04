@@ -193,7 +193,7 @@ const Nav = ({ isOpen, toggleMenu, user }) => {
             </NavLink>
           </li>
           <li onClick={toggleMenu}>
-            <NavLink to="/">
+            <NavLink to="/way">
               오시는길{" "}
               <span>
                 <IoIosArrowForward />
