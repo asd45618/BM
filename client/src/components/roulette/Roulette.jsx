@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import RouletteModal from "./RouletteModal";
+import { Link } from "react-router-dom";
 
 const RouletteBlock = styled.div`
   position: relative;
@@ -34,7 +34,7 @@ const RouletteBlock = styled.div`
     font-size: 12px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
   svg {
     color: red;
@@ -48,16 +48,39 @@ const RouletteBlock = styled.div`
     position: absolute;
     width: 70px;
     height: 70px;
-    top: 69%;
+    top: 59%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+  }
+  a {
+    margin-top: 35px;
+    border: 2px solid var(--main);
+    font-family: var(--m-f-m);
+    color: var(--main);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .modal {
+    animation: fadeInDown 0.5s;
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateZ(0);
+    }
   }
 `;
 
 const Roulette = () => {
   const canvasRef = useRef(null);
   const [result, setResult] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const list = useSelector((state) => state.foods.food);
 
   const colors = ["#61AEB1", "#8AC1C3", "#49BBBF"];
@@ -104,7 +127,7 @@ const Roulette = () => {
     const [cw, ch] = [canvas.width / 2, canvas.height / 2];
 
     drawRoulette(ctx, cw, ch);
-  }, []);
+  }, [list]);
 
   const rotate = () => {
     const canvas = canvasRef.current;
@@ -120,8 +143,9 @@ const Roulette = () => {
       canvas.style.transition = `2s`;
 
       setTimeout(() => {
-        setResult(`오늘의 야식은?! ${list[ran].fdName} 어떠신가요?`);
-      }, 2000);
+        setResult(list[ran]);
+        setShowModal(true);
+      }, 2200);
     }, 1);
   };
 
@@ -136,25 +160,16 @@ const Roulette = () => {
       <button className="start__btn" onClick={rotate}>
         start
       </button>
-      <div
-        className="modal show"
-        style={{ display: "block", position: "initial" }}
-      >
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <p>Modal body text goes here.</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save changes</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
-      </div>
+      <Link to={"/foodRecommend"}>카테고리 선택하러 가기</Link>
+      {showModal ? (
+        <RouletteModal
+          className="modal"
+          result={result}
+          setShowModal={setShowModal}
+        />
+      ) : (
+        ""
+      )}
     </RouletteBlock>
   );
 };
