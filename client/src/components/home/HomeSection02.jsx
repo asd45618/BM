@@ -129,6 +129,9 @@ const HomeSection02 = () => {
           </div>
         ))}
       </Slider>
+      <button className="roulette__btn">
+        랜덤추천 바로가기 <span>dd</span>
+      </button>
     </HomeSection02Block>
   );
 };
