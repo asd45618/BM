@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import cn from "classnames";
 
 const ServiceSectionBlock = styled.div`
   margin-top: 106px;
@@ -36,6 +37,13 @@ const ServiceSectionBlock = styled.div`
       align-items: center;
       flex-direction: column;
       margin: 50px auto;
+      transition: all 0.7s ease;
+      opacity: 0;
+      transform: translateX(500px);
+      &.on {
+        transform: translateX(0);
+        opacity: 1;
+      }
       img {
         width: 100%;
         height: auto;
@@ -57,6 +65,13 @@ const ServiceSectionBlock = styled.div`
       }
     }
     .service__service__main {
+      transition: all 0.7s ease;
+      opacity: 0;
+      transform: translateY(500px);
+      &.on {
+        transform: translateX(0);
+        opacity: 1;
+      }
       .service__subPhoto_imgbox {
         width: 100%;
         height: 500px;
@@ -69,14 +84,29 @@ const ServiceSectionBlock = styled.div`
       }
 
       p {
-        font-size: 1.3em;
+        font-size: 1.2em;
         font-family: var(--m-f-n);
-        padding: 0 10px;
+        padding: 10px 20px;
         line-height: 2em;
         text-align: center;
+        word-break: keep-all;
       }
       a {
-        margin: 10px;
+        margin: 30px auto 40px;
+        display: block;
+        width: 30%;
+        text-align: center;
+        border: 1px solid var(--main);
+        padding: 15px 0px;
+        transition: all 0.5s ease;
+        font-size: 1.3em;
+        font-family: var(--m-f-m);
+        color: var(--main);
+        &:hover {
+          background: var(--main);
+          color: white;
+          width: 40%;
+        }
       }
       .service__submain1,
       .service__submain2 {
@@ -101,6 +131,7 @@ const ServiceSectionBlock = styled.div`
 
 const ServiceSection = () => {
   const [active, setActive] = useState(0);
+  const [activeAni, setActiveAni] = useState(false);
   const serviceMenu = [
     {
       menu: "./assets/image/service_logo_01.png",
@@ -152,6 +183,10 @@ const ServiceSection = () => {
     ],
   };
 
+  useEffect(() => {
+    setActiveAni(true);
+  }, []);
+
   return (
     <ServiceSectionBlock>
       <div className="service__wrap">
@@ -168,13 +203,16 @@ const ServiceSection = () => {
             </button>
           ))}
         </div>
-        <div className="service__tapLogo">
+        <div className={cn("service__tapLogo", activeAni && "on")}>
           <img src={serviceMenu[active].menu} alt="" />
           <span className="under__line"></span>
           <p>{serviceMenu[active].serviceSub}</p>
         </div>
         {serviceData[active].map((item, index) => (
-          <div className="service__service__main" key={index}>
+          <div
+            className={cn("service__service__main", activeAni && "on")}
+            key={index}
+          >
             <figure className="service__subPhoto_imgbox">
               <img src={item.serviceImg} alt="" />
             </figure>
@@ -196,7 +234,11 @@ const ServiceSection = () => {
                 </div>
               )}
             </div>
-            {item.serviceLink && <a href={item.serviceLink}>바로가기</a>}
+            {item.serviceLink && (
+              <a href={item.serviceLink} target="_blank">
+                바로가기
+              </a>
+            )}
           </div>
         ))}
       </div>
