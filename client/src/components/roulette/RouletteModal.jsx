@@ -5,6 +5,33 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
 const RouletteModalBlock = styled.div`
+  animation: fadeInDown 0.5s;
+  &.close {
+    animation: fadeInUp 0.5s;
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translate(0, -100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 1;
+      transform: translate(0, -100%);
+    }
+    100% {
+      opacity: 0;
+      transform: translateZ(0);
+    }
+  }
+
   position: fixed;
   width: 100%;
   .modal {

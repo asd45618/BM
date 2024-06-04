@@ -99,6 +99,11 @@ const MemberModify = () => {
 
   const memberRemove = () => {
     const answer = confirm("정말 탈퇴하시겠습니까?");
+    if (pwMessage || !userInfo.userPw) {
+      setPwMessage("비밀번호를 확인해주세요.");
+      userPwRef.current.focus();
+      return false;
+    }
     if (answer) {
       axios
         .post("http://localhost:8001/auth/remove", { userId: userInfo.userId })

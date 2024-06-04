@@ -61,20 +61,6 @@ const RouletteBlock = styled.div`
     padding: 10px;
     border-radius: 5px;
   }
-  .modal {
-    animation: fadeInDown 0.5s;
-  }
-
-  @keyframes fadeInDown {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, -100%, 0);
-    }
-    100% {
-      opacity: 1;
-      transform: translateZ(0);
-    }
-  }
 `;
 
 const Roulette = () => {
@@ -163,7 +149,7 @@ const Roulette = () => {
       <Link to={"/foodRecommend"}>카테고리 선택하러 가기</Link>
       {showModal ? (
         <RouletteModal
-          className="modal"
+          className={showModal ? "" : "close"}
           result={result}
           setShowModal={setShowModal}
         />
