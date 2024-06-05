@@ -9,23 +9,14 @@ import AboutIco02 from "@/assets/image/aboutUs_ico_02.png";
 import AboutIco03 from "@/assets/image/aboutUs_ico_03.png";
 import AboutIco04 from "@/assets/image/aboutUs_ico_04.png";
 import AboutIco05 from "@/assets/image/aboutUs_ico_05.png";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AboutUsSectionBlock = styled.div`
   margin-top: 106px;
   overflow: hidden;
   position: relative;
   scroll-behavior: smooth; /* 부드러운 스크롤을 위해 추가 */
-`;
-
-const Dot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${({ active }) =>
-    active ? "white" : "rgba(255, 255, 255, 0.5)"};
 `;
 
 const Section = styled.div`
@@ -180,44 +171,9 @@ const Section = styled.div`
 
 const AboutUsSection = () => {
   const [ani, setAni] = useState(false);
-  React.useEffect(() => {
-    gsap.utils.toArray(".textbox").forEach((selector) => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: selector,
-            start: "100% 100%",
-            end: "100% 100%",
-            scrub: 1,
-            // markers: true,
-          },
-        })
-        .fromTo(
-          selector,
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, ease: "none", duration: 7 },
-          0
-        );
-    });
-  }, []);
-  React.useEffect(() => {
-    gsap.utils.toArray(".Ai").forEach((selector) => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: selector,
-            start: "100% 100%",
-            end: "100% 100%",
-            scrub: 1,
-            // markers: true,
-          },
-        })
-        .fromTo(
-          selector,
-          { opacity: 0, x: 100 },
-          { opacity: 1, x: 0, ease: "none", duration: 7 },
-          0
-        );
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
     });
   }, []);
 
@@ -268,21 +224,33 @@ const AboutUsSection = () => {
         </Section>
         <Section>
           <div className={cn("AboutUsSection__section1", "AS")}>
-            <div className="textbox">
+            <div
+              className="textbox"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top"
+            >
               <h1>
                 대한민국 <br /> 1등 배달앱
               </h1>
               <span className="under__line"></span>
               <p>오늘도 당신에게 행복을 배달 중입니다.</p>
             </div>
-            <figure className={cn("AboutUsIco__imgbox01", "Ai")}>
+            <figure
+              className={cn("AboutUsIco__imgbox01", "Ai")}
+              data-aos="fade-left"
+              data-aos-anchor-placement="top"
+            >
               <img src={AboutIco01} alt="" />
             </figure>
           </div>
         </Section>
         <Section>
           <div className={cn("AboutUsSection1__textbox", "AS")}>
-            <div className="textbox">
+            <div
+              className="textbox"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top"
+            >
               <h1>
                 배달을
                 <br /> 더 빠르게
@@ -296,14 +264,22 @@ const AboutUsSection = () => {
                 <br /> 상황에 맞게 원하는 대로 골라 주문해보세요
               </p>
             </div>
-            <figure className={cn("AboutUsIco__imgbox02", "Ai")}>
+            <figure
+              className={cn("AboutUsIco__imgbox02", "Ai")}
+              data-aos="fade-left"
+              data-aos-anchor-placement="top"
+            >
               <img src={AboutIco02} alt="" />
             </figure>
           </div>
         </Section>
         <Section>
           <div className={cn("AboutUsSection3__textbox", "AS")}>
-            <div className="textbox">
+            <div
+              className="textbox"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top"
+            >
               <h1>
                 <br /> 초신속 <br />
                 배민B마트
@@ -316,14 +292,22 @@ const AboutUsSection = () => {
                 <br /> 365일 연중무휴 B마트에서 만나보세요.
               </p>
             </div>
-            <figure className={cn("AboutUsIco__imgbox03", "Ai")}>
+            <figure
+              className={cn("AboutUsIco__imgbox03", "Ai")}
+              data-aos="fade-left"
+              data-aos-anchor-placement="top"
+            >
               <img src={AboutIco03} alt="" />
             </figure>
           </div>
         </Section>
         <Section>
           <div className={cn("AboutUsSection4__textbox", "AS")}>
-            <div className="textbox">
+            <div
+              className="textbox"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top"
+            >
               <h1>
                 장보기도
                 <br /> 쇼핑도
@@ -337,14 +321,22 @@ const AboutUsSection = () => {
                 <br /> 이젠 택배말고 배달하세요.
               </p>
             </div>
-            <figure className={cn("AboutUsIco__imgbox04", "Ai")}>
+            <figure
+              className={cn("AboutUsIco__imgbox04", "Ai")}
+              data-aos="fade-left"
+              data-aos-anchor-placement="top"
+            >
               <img src={AboutIco04} alt="" />
             </figure>
           </div>
         </Section>
         <Section>
           <div className={cn("AboutUsSection5__textbox", "AS")}>
-            <div className="textbox">
+            <div
+              className="textbox"
+              data-aos="fade-down"
+              data-aos-anchor-placement="top"
+            >
               <h1>
                 많이 살수록
                 <br /> 더 저렴하죠
@@ -359,7 +351,11 @@ const AboutUsSection = () => {
                 <br /> 대용량도 배민에서 주문하세요. 매일이 특가입니다.
               </p>
             </div>
-            <figure className={cn("AboutUsIco__imgbox05", "Ai")}>
+            <figure
+              className={cn("AboutUsIco__imgbox05", "Ai")}
+              data-aos="fade-left"
+              data-aos-anchor-placement="top"
+            >
               <img src={AboutIco05} alt="" />
             </figure>
           </div>

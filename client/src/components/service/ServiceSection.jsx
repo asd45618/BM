@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import cn from "classnames";
 import { FaArrowRightLong } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ServiceSectionBlock = styled.div`
   margin-top: 106px;
@@ -38,13 +39,7 @@ const ServiceSectionBlock = styled.div`
       align-items: center;
       flex-direction: column;
       margin: 50px auto;
-      transition: all 0.7s ease;
-      opacity: 0;
-      transform: translateX(500px);
-      &.on {
-        transform: translateX(0);
-        opacity: 1;
-      }
+
       img {
         width: 100%;
         height: auto;
@@ -66,13 +61,6 @@ const ServiceSectionBlock = styled.div`
       }
     }
     .service__service__main {
-      transition: all 0.7s ease;
-      opacity: 0;
-      transform: translateY(500px);
-      &.on {
-        transform: translateX(0);
-        opacity: 1;
-      }
       .service__subPhoto_imgbox {
         width: 100%;
         height: 500px;
@@ -149,7 +137,6 @@ const ServiceSectionBlock = styled.div`
 
 const ServiceSection = () => {
   const [active, setActive] = useState(0);
-  const [activeAni, setActiveAni] = useState(false);
   const serviceMenu = [
     {
       menu: "./assets/image/service_logo_01.png",
@@ -201,14 +188,26 @@ const ServiceSection = () => {
     ],
   };
 
+  const [key, setKey] = useState(0);
   useEffect(() => {
-    setActiveAni(true);
+    setKey((prevKey) => prevKey + 1);
+    AOS.refresh(); // 상태 변경 시 AOS를 새로고침
+  }, [active]);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+    });
   }, []);
 
   return (
     <ServiceSectionBlock>
       <div className="service__wrap">
-        <div className="service__type">
+        <div
+          className="service__type "
+          data-aos="fade-down"
+          data-aos-anchor-placement="top"
+        >
           {serviceMenu.map((item, index) => (
             <button
               key={index}
@@ -221,15 +220,21 @@ const ServiceSection = () => {
             </button>
           ))}
         </div>
-        <div className={cn("service__tapLogo", activeAni && "on")}>
+        <div
+          className="service__tapLogo"
+          data-aos="fade-down"
+          data-aos-anchor-placement="top"
+        >
           <img src={serviceMenu[active].menu} alt="" />
           <span className="under__line"></span>
           <p>{serviceMenu[active].serviceSub}</p>
         </div>
         {serviceData[active].map((item, index) => (
           <div
-            className={cn("service__service__main", activeAni && "on")}
-            key={index}
+            className="service__service__main"
+            key={`${key}-${index}`}
+            data-aos="fade-down"
+            data-aos-anchor-placement="top"
           >
             <figure className="service__subPhoto_imgbox">
               <img src={item.serviceImg} alt="" />

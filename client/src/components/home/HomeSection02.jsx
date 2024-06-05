@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllFood } from "../../store/food";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomeSection02Block = styled.div`
-  margin: 150px auto;
+  margin: 350px auto;
   overflow: hidden;
   .HomeSection2__title {
     text-align: center;
@@ -52,8 +54,13 @@ const HomeSection02Block = styled.div`
     }
     .HomeSection2__imagebox {
       width: 100%;
-      height: 100%;
+      height: 200px;
       overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -135,9 +142,19 @@ const HomeSection02 = () => {
     dispatch(fetchAllFood());
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+    });
+  }, []);
+
   return (
     <HomeSection02Block>
-      <div className="HomeSection2__title">
+      <div
+        className="HomeSection2__title"
+        data-aos="fade-up"
+        data-aos-anchor-placement="top"
+      >
         <h1>
           <strong>배달의민족</strong>의 메뉴추천
         </h1>
@@ -147,7 +164,7 @@ const HomeSection02 = () => {
       <Slider {...options}>
         {foodList?.map((item) => (
           <div
-            key={item.id}
+            key={item.fdNo}
             className="slide"
             onClick={() =>
               navigate(`/foodDetail/${item.fdCategory}/${item.fdNo}`, {
@@ -162,7 +179,12 @@ const HomeSection02 = () => {
           </div>
         ))}
       </Slider>
-      <Link to="/foodRecommend" className="gobutton">
+      <Link
+        to="/foodRecommend"
+        className="gobutton"
+        data-aos="fade-down"
+        data-aos-anchor-placement="top"
+      >
         <p>랜덤메뉴추천</p>{" "}
         <span>
           <FaArrowRightLong />
