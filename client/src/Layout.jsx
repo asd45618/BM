@@ -1,9 +1,11 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import styled from "styled-components";
 import GifImage from "@/assets/image/768_ani.gif";
+import TopBtn from "./components/layout/TopBtn";
+import RecentBtn from "./components/layout/RecentBtn";
 
 const Wrap = styled.div`
   div.cover {
@@ -38,6 +40,22 @@ const Wrap = styled.div`
 `;
 
 const Layout = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const location = useLocation();
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Wrap>
       <div className="cover">
@@ -48,6 +66,16 @@ const Layout = () => {
         <Header />
         <main>
           <Outlet />
+          {scrollPosition && location.pathname === "/" ? (
+            <RecentBtn className={scrollPosition ? "appear" : "disappear"} />
+          ) : (
+            ""
+          )}
+          {scrollPosition ? (
+            <TopBtn className={scrollPosition ? "appear" : "disappear"} />
+          ) : (
+            ""
+          )}
         </main>
         <Footer />
       </div>

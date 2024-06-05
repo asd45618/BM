@@ -45,6 +45,7 @@ foodRouter.get("/list", (req, res) => {
 foodRouter.post("/likeClick", (req, res) => {
   const fdNo = req.body.fdNo;
   const userId = req.body.userId;
+  const date = dayjs();
   db.query(
     "SELECT * FROM liketbl WHERE fdNo=? AND userId=?",
     [fdNo, userId],
@@ -68,8 +69,8 @@ foodRouter.post("/likeClick", (req, res) => {
           );
         } else {
           db.query(
-            "INSERT INTO liketbl (fdNo, userId) VALUES (?, ?)",
-            [fdNo, userId],
+            "INSERT INTO liketbl (fdNo, userId, date) VALUES (?, ?, ?)",
+            [fdNo, userId, date.format("YYYY-MM-DD HH:mm:ss")],
             (insertErr, insertResult) => {
               if (insertErr) {
                 res.status(500).send("실패");
@@ -100,7 +101,7 @@ foodRouter.get("/like", (req, res) => {
 foodRouter.get("/allLike", (req, res) => {
   const userId = req.query.userId;
   const query =
-    "SELECT l.userId, f.* FROM liketbl AS l JOIN foodtbl AS f ON l.fdNo = f.fdNo WHERE l.userId = ?";
+    "SELECT l.userId, f.* FROM liketbl AS l JOIN foodtbl AS f ON l.fdNo = f.fdNo WHERE l.userId = ? ORDER BY date DESC";
   db.query(query, [userId], (err, result) => {
     if (err) {
       res.status(500).send("실패");
