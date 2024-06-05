@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { LuMapPin } from "react-icons/lu";
 import { TiPhoneOutline } from "react-icons/ti";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const WayToComeBlock = styled.div`
   margin-top: 106px;
@@ -182,13 +184,23 @@ const WayToCome = () => {
     });
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+    });
+  }, []);
+
   return (
     <WayToComeBlock
       markerLeft={markerPosition.left}
       markerTop={markerPosition.top}
     >
       <div className="map_wrap">
-        <div className="WayToCome__mainTitle">
+        <div
+          className="WayToCome__mainTitle"
+          data-aos="fade-down"
+          data-aos-anchor-placement="top"
+        >
           <p>
             <FaMapLocationDot className="title__ico" />
           </p>

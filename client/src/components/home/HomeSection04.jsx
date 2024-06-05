@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LogoGreen from "@/assets/image/logo_bm_green.png";
 import CtGreen from "@/assets/image/bm_green.png";
 import BhBg from "@/assets/image/bg_bm_green.jpg";
 import Logoimage from "@/assets/image/logo.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomeSection04Block = styled.div`
-  margin-top: 100px;
+  margin-top: 350px;
   margin-bottom: 50px;
   .HomeSection4__title {
     text-align: center;
@@ -98,9 +100,18 @@ const HomeSection04Block = styled.div`
 `;
 
 const HomeSection04 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+    });
+  }, []);
   return (
     <HomeSection04Block>
-      <div className="HomeSection4__title">
+      <div
+        className="HomeSection4__title"
+        data-aos="fade-down"
+        data-aos-anchor-placement="top"
+      >
         <h1>
           <figure className="HomeSection4__imagebox">
             <img src={LogoGreen} alt="" />
@@ -109,7 +120,7 @@ const HomeSection04 = () => {
         <p>배달의 민족 친환경 프로젝트, 캠페인</p>
         <span className="under__line"></span>
       </div>
-      <div className="popup">
+      <div className="popup" data-aos="fade-up" data-aos-anchor-placement="top">
         <figure className="popup__imagebox">
           <img src={BhBg} alt="팝업배경" />
         </figure>
