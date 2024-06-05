@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import video from "@/assets/image/HomeSection03__video.mp4";
 import styled from "styled-components";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomeSection03Block = styled.div`
+  margin-top: 350px;
   video {
     width: 100%;
     height: auto;
@@ -57,9 +60,19 @@ const HomeSection03Block = styled.div`
 `;
 
 const Homesection03 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+    });
+  }, []);
+
   return (
     <HomeSection03Block>
-      <div className="HomeSection3__title">
+      <div
+        className="HomeSection3__title"
+        data-aos="fade-up"
+        data-aos-anchor-placement="top"
+      >
         <h1>
           '문앞으로 배달되는 <br />
           <strong>일상의 행복</strong>' 이라는 비전으로
@@ -70,11 +83,21 @@ const Homesection03 = () => {
         </p>
         <span className="under__line"></span>
       </div>
-      <video autoPlay loop controls>
+      <video
+        autoPlay
+        loop
+        controls
+        data-aos="fade-down"
+        data-aos-anchor-placement="top"
+      >
         <source src={video} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="HomeSection3__subtitle">
+      <div
+        className="HomeSection3__subtitle"
+        data-aos="fade-down"
+        data-aos-anchor-placement="top"
+      >
         <h1>
           오늘이 <strong>전설</strong>이 될 수 있도록
         </h1>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchFood } from "../../store/food";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomeSection01Block = styled.section`
   padding-top: 150px;
@@ -129,11 +131,18 @@ const 함수이름 = (foodId) => {
   Navigate("/foodlist/foodId", {state: {foodId}})
 } */
   }
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+    });
+  }, []);
   return (
     <HomeSection01Block>
-      <h1>음식리스트</h1>
-      <span></span>
-      <ul className="food__Depth1">
+      <div className="homeSection01__maintext" data-aos="fade-up">
+        <h1>음식리스트</h1>
+        <span></span>
+      </div>
+      <ul className="food__Depth1" data-aos="fade-down">
         {foodList.map((item, index) => (
           <li key={index}>
             <Link
