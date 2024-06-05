@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const RouletteModalBlock = styled.div`
   animation: fadeInDown 0.5s;
+
   &.close {
     animation: fadeInUp 0.5s;
   }
@@ -13,22 +14,22 @@ const RouletteModalBlock = styled.div`
   @keyframes fadeInDown {
     0% {
       opacity: 0;
-      transform: translate(0, -100%);
+      transform: translate3d(0, -100%, 0);
     }
     100% {
       opacity: 1;
-      transform: translate(0, 0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes fadeInUp {
     0% {
       opacity: 1;
-      transform: translate(0, -100%);
+      transform: translate3d(0, 0, 0);
     }
     100% {
       opacity: 0;
-      transform: translateZ(0);
+      transform: translate3d(0, -100%, 0);
     }
   }
 
@@ -88,19 +89,25 @@ const RouletteModalBlock = styled.div`
   }
 `;
 
-const RouletteModal = ({ result, setShowModal }) => {
+const RouletteModal = ({ result, reSpin }) => {
   const navigate = useNavigate();
   const goToFood = () => {
     navigate(`/foodDetail/${result.fdCategory}/${result.fdNo}`, {
       state: { item: result },
     });
   };
-  const reSpin = () => {
-    setShowModal(false);
+
+  const [close, setClose] = useState(false);
+
+  const closeRullet = () => {
+    setClose(true);
+    setTimeout(() => {
+      reSpin(false);
+    }, 300); // 0.5 seconds delay
   };
 
   return (
-    <RouletteModalBlock>
+    <RouletteModalBlock className={close ? "close" : ""}>
       <div
         className="modal show"
         style={{ display: "block", position: "initial" }}
@@ -124,7 +131,7 @@ const RouletteModal = ({ result, setShowModal }) => {
             <Button variant="secondary" onClick={goToFood}>
               상세페이지로 이동
             </Button>
-            <Button variant="primary" onClick={reSpin}>
+            <Button variant="primary" onClick={closeRullet}>
               다시 돌리기
             </Button>
           </Modal.Footer>

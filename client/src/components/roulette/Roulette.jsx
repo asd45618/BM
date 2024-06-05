@@ -135,6 +135,10 @@ const Roulette = () => {
     }, 1);
   };
 
+  const reSpin = (value) => {
+    setShowModal(value);
+  };
+
   return (
     <RouletteBlock>
       <h1>배민 룰렛</h1>
@@ -147,14 +151,12 @@ const Roulette = () => {
         start
       </button>
       <Link to={"/foodRecommend"}>카테고리 선택하러 가기</Link>
-      {showModal ? (
+      {showModal && (
         <RouletteModal
-          className={showModal ? "" : "close"}
+          // className={showModal ? "" : "close"}
           result={result}
-          setShowModal={setShowModal}
+          reSpin={reSpin}
         />
-      ) : (
-        ""
       )}
     </RouletteBlock>
   );
