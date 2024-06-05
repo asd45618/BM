@@ -14,8 +14,15 @@ const FoodListSectionBlock = styled.div`
   font-family: var(--m-f-m);
   .h1__tag {
     text-align: center;
-    margin-bottom: 60px;
+    color: var(--main);
   }
+  .under__line {
+    border-bottom: 2px solid var(--main);
+    width: 40px;
+    display: inline-block;
+    margin: 30px 0;
+  }
+
   ul {
     padding: 0;
     li {
@@ -24,35 +31,43 @@ const FoodListSectionBlock = styled.div`
       .info__wrapper {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
         padding-bottom: 10px;
         .figure {
           flex: 0 0 30%;
+          width: 130px;
+          height: 130px;
           margin-right: 15px;
-          margin-bottom: 0;
+          margin-bottom: 25px;
           cursor: pointer;
           img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 25px;
           }
         }
         .info {
-          flex: 0 0 50%;
+          flex: 0 0 40%;
           .text {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 3px;
             h2 {
-              flex: 0 0 70%;
               margin-right: 10px;
+              flex: 0 0 70%;
               margin-bottom: 0;
             }
             span {
             }
           }
           p {
-            color: #aaa;
+            color: #828282;
             font-size: 14px;
+            font-family: var(--m-f-n);
+            word-break: keep-all;
           }
         }
         .like__btn {
@@ -64,7 +79,14 @@ const FoodListSectionBlock = styled.div`
           color: #ddd;
           svg {
             cursor: pointer;
+            transition: all 0.5s ease;
             &.on {
+              color: #fa5252;
+              &:hover {
+                color: #ddd;
+              }
+            }
+            &:hover {
               color: #fa5252;
             }
           }
@@ -118,6 +140,7 @@ const FoodListSection = ({ category }) => {
     <FoodListSectionBlock>
       <div className="h1__tag">
         <h1>{category}</h1>
+        <span className="under__line"></span>
       </div>
       <ul>
         {list?.map((item) => (

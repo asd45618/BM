@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import cn from "classnames";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const ServiceSectionBlock = styled.div`
   margin-top: 106px;
@@ -91,23 +92,7 @@ const ServiceSectionBlock = styled.div`
         text-align: center;
         word-break: keep-all;
       }
-      a {
-        margin: 30px auto 40px;
-        display: block;
-        width: 30%;
-        text-align: center;
-        border: 1px solid var(--main);
-        padding: 15px 0px;
-        transition: all 0.5s ease;
-        font-size: 1.3em;
-        font-family: var(--m-f-m);
-        color: var(--main);
-        &:hover {
-          background: var(--main);
-          color: white;
-          width: 40%;
-        }
-      }
+
       .service__submain1,
       .service__submain2 {
         align-items: center;
@@ -123,6 +108,39 @@ const ServiceSectionBlock = styled.div`
           justify-content: center;
           img {
           }
+        }
+      }
+    }
+    .gobutton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px auto;
+      border: 1px solid var(--main);
+      width: 40%;
+      padding: 10px;
+      color: var(--main);
+      font-family: var(--m-f-m);
+      transition: all 0.5s ease;
+      span {
+        transition: all 0.5s ease;
+        transform: translateX(10px);
+      }
+      p {
+        margin: 0;
+        transition: all 0.5s ease;
+        font-size: 1.3em;
+        padding: 0;
+      }
+      &:hover {
+        background: var(--main);
+        span {
+          transform: translateX(20px);
+          color: white;
+        }
+        p {
+          color: white;
+          border-color: var(--main);
         }
       }
     }
@@ -235,8 +253,11 @@ const ServiceSection = () => {
               )}
             </div>
             {item.serviceLink && (
-              <a href={item.serviceLink} target="_blank">
-                바로가기
+              <a href={item.serviceLink} target="_blank" className="gobutton">
+                <p>바로가기</p>{" "}
+                <span>
+                  <FaArrowRightLong />
+                </span>
               </a>
             )}
           </div>

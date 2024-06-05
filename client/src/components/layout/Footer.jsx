@@ -177,6 +177,112 @@ const Footer = () => {
               서울시 송파구
             </span>
             <span>위례성대로 2 (방이동, 장은빌딩)</span>
+            <div className="lc" style={{ opacity: "0.6" }}>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  target="_blank"
+                  href="https://icons8.com/icon/lGwdk0g8m4H5/heart"
+                >
+                  처럼
+                </a>{" "}
+                작가:{" "}
+                <a target="_blank" href="https://icons8.com">
+                  Icons8
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  target="_blank"
+                  href="https://icons8.com/icon/FtmgJwozFbcP/checklist"
+                >
+                  List
+                </a>{" "}
+                icon by{" "}
+                <a target="_blank" href="https://icons8.com">
+                  Icons8
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="비빔밥 아이콘"
+                >
+                  비빔밥 아이콘 제작자: Freepik - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="회 아이콘"
+                >
+                  회 아이콘 제작자: Freepik - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="짜장면 아이콘"
+                >
+                  짜장면 아이콘 제작자: Freepik - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="파스타 아이콘"
+                >
+                  파스타 아이콘 제작자: Konkapp - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="음식 아이콘"
+                >
+                  음식 아이콘 제작자: tulpahn - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="떡볶이 아이콘"
+                >
+                  떡볶이 아이콘 제작자: Enhaa - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="떡볶이 아이콘"
+                >
+                  떡볶이 아이콘 제작자: Enhaa - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/-"
+                  title="닭 튀김 아이콘"
+                >
+                  닭 튀김 아이콘 제작자: ultimatearm - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="피자 아이콘"
+                >
+                  피자 아이콘 제작자: Freepik - Flaticon
+                </a>
+              </span>
+              <span style={{ opacity: "0.7", fontSize: "10px" }}>
+                <a
+                  href="https://www.flaticon.com/kr/free-icons/"
+                  title="음식 아이콘"
+                >
+                  음식 아이콘 제작자: Freepik - Flaticon
+                </a>
+              </span>
+            </div>
           </div>
           <div className="footer__sns">
             <a href="" className="facebook">

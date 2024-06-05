@@ -4,7 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllFood } from "../../store/food";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const HomeSection02Block = styled.div`
   margin: 150px auto;
@@ -72,6 +73,38 @@ const HomeSection02Block = styled.div`
     object-fit: cover;
     border-radius: 20px;
   }
+  .gobutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    border: 1px solid var(--main);
+    width: 40%;
+    padding: 15px 30px;
+    color: var(--main);
+    font-family: var(--m-f-m);
+    transition: all 0.5s ease;
+    span {
+      transition: all 0.5s ease;
+      transform: translateX(10px);
+    }
+    p {
+      margin: 0;
+      transition: all 0.5s ease;
+      font-size: 1.3em;
+    }
+    &:hover {
+      background: var(--main);
+      span {
+        transform: translateX(20px);
+        color: white;
+      }
+      p {
+        color: white;
+        border-color: var(--main);
+      }
+    }
+  }
   /* .slick-slide:nth-child(even) .slide {
     transform: translateY(-20px);
   }
@@ -129,9 +162,12 @@ const HomeSection02 = () => {
           </div>
         ))}
       </Slider>
-      <button className="roulette__btn">
-        랜덤추천 바로가기 <span>dd</span>
-      </button>
+      <Link to="/foodRecommend" className="gobutton">
+        <p>랜덤메뉴추천</p>{" "}
+        <span>
+          <FaArrowRightLong />
+        </span>
+      </Link>
     </HomeSection02Block>
   );
 };

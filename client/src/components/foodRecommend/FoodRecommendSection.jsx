@@ -16,19 +16,22 @@ const FoodRecommendSectionBlock = styled.div`
     text-align: center;
     font-weight: bold;
     color: #9c9c9c;
+    font-family: var(--m-f-n);
   }
   span {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid var(--main);
     width: 40px;
     display: flex;
     text-align: center;
     margin: 0px auto 20px;
   }
   .desc {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 50px;
+    font-family: var(--m-f-n);
+    color: #303030;
   }
   .food__Depth1 {
     align-items: center;

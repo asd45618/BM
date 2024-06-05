@@ -12,6 +12,7 @@ const RouletteBlock = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 150px auto 100px;
+  overflow: hidden;
   h1 {
     color: var(--main);
     font-size: 3em;
@@ -32,11 +33,12 @@ const RouletteBlock = styled.div`
     margin: 0px auto 20px;
   }
   .desc {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
     font-family: var(--m-f-n);
+    color: #4b4b4b;
   }
   svg {
     color: #4b4b4b;
@@ -55,7 +57,13 @@ const RouletteBlock = styled.div`
     transform: translate(-50%, -50%);
     border-radius: 50%;
     font-family: var(--m-f-m);
-    color: #4b4b4b;
+    background: #4b4b4b;
+    color: white;
+    transition: all 0.5s ease;
+    &:hover {
+      background: #fff;
+      color: #4b4b4b;
+    }
   }
   a {
     margin-top: 35px;
@@ -64,6 +72,11 @@ const RouletteBlock = styled.div`
     color: var(--main);
     padding: 10px;
     border-radius: 5px;
+    transition: all 0.5s ease;
+    &:hover {
+      background: var(--main);
+      color: white;
+    }
   }
 `;
 
@@ -154,7 +167,9 @@ const Roulette = () => {
       <button className="start__btn" onClick={rotate}>
         start
       </button>
-      <Link to={"/foodRecommend"}>카테고리 선택하러 가기</Link>
+      <Link to={"/foodRecommend"} className="category">
+        카테고리 선택하러 가기
+      </Link>
       {showModal && (
         <RouletteModal
           // className={showModal ? "" : "close"}

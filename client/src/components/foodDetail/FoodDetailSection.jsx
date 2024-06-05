@@ -20,14 +20,18 @@ const FoodDetailSectionBlock = styled.div`
       height: 100%;
     }
     .info {
+      padding: 30px 0;
       .text {
         margin: 10px 0 30px;
+
         p {
           margin-bottom: 0.7rem;
+          font-size: 30px;
         }
         h2 {
           font-size: 36px;
           margin-bottom: 0;
+          color: var(--main);
         }
         .bar__wrapper {
           display: flex;
@@ -40,8 +44,9 @@ const FoodDetailSectionBlock = styled.div`
         }
         .text__des {
           margin: 0 10px;
-          color: #aaa;
-          font-size: 16px;
+          color: #828282;
+          font-family: var(--m-f-n);
+          font-size: 18px;
           word-break: keep-all;
         }
       }
@@ -54,7 +59,14 @@ const FoodDetailSectionBlock = styled.div`
       color: #ddd;
       svg {
         cursor: pointer;
+        transition: all 0.5s ease;
         &.on {
+          color: #fa5252;
+          &:hover {
+            color: #ddd;
+          }
+        }
+        &:hover {
           color: #fa5252;
         }
       }
