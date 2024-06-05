@@ -8,6 +8,8 @@ import { fetchLikeFood, fetchRecent } from "../../store/food";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ListImg from "@/assets/image/list_ico.gif";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const RecentFoodSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -151,6 +153,12 @@ const RecentFoodSection = () => {
       : dispatch(fetchLikeFood(null));
   }, [user]);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <RecentFoodSectionBlock>
       <div className="h1__tag">
@@ -169,7 +177,7 @@ const RecentFoodSection = () => {
       ) : (
         <ul>
           {recentList?.map((item) => (
-            <li key={item.fdNo}>
+            <li key={item.fdNo} data-aos="zoom-in-up" data-aos-offset="120">
               <div className="info__wrapper">
                 <Figure onClick={() => goToDetail(item)}>
                   <Figure.Image

@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { fetchLikeFood } from "../../store/food";
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FoodDetailSectionBlock = styled.div`
   margin: 106px 0 50px;
@@ -14,6 +16,7 @@ const FoodDetailSectionBlock = styled.div`
   margin-bottom: 5rem;
   text-align: center;
   .detail__wrapper {
+    overflow: hidden;
     padding-bottom: 10px;
     img {
       width: 100%;
@@ -116,11 +119,17 @@ const FoodDetailSection = ({ item }) => {
     }
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <FoodDetailSectionBlock>
       <div className="detail__wrapper">
-        <Image src={fdImg} fluid />
-        <div className="text__wrapper">
+        <Image src={fdImg} fluid data-aos="zoom-out" />
+        <div className="text__wrapper" data-aos="fade-up">
           <div className="info">
             <div className="text">
               <p>{fdKrCategory}</p>
@@ -132,7 +141,7 @@ const FoodDetailSection = ({ item }) => {
             </div>
           </div>
         </div>
-        <div className="like__btn">
+        <div className="like__btn" data-aos="zoom-in">
           <FontAwesomeIcon
             icon={faHeart}
             onClick={() => clickLikeBtn(fdNo)}

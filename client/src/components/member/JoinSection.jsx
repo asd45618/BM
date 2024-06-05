@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import styled from "styled-components";
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const LoginSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -246,8 +248,18 @@ const LoginSection = () => {
     };
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
-    <LoginSectionBlock className="row">
+    <LoginSectionBlock
+      className="row"
+      data-aos="zoom-out-up"
+      data-aos-anchor-placement="top-bottom"
+    >
       <div className="join__text">
         <p>
           <FaUserPlus />

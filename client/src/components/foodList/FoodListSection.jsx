@@ -7,6 +7,8 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Figure from "react-bootstrap/Figure";
 import axios from "axios";
 import { fetchLikeFood } from "../../store/food";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FoodListSectionBlock = styled.div`
   margin: 130px 0 50px;
@@ -136,6 +138,12 @@ const FoodListSection = ({ category }) => {
     user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
   }, [user]);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <FoodListSectionBlock>
       <div className="h1__tag">
@@ -144,7 +152,7 @@ const FoodListSection = ({ category }) => {
       </div>
       <ul>
         {list?.map((item) => (
-          <li key={item.fdNo}>
+          <li key={item.fdNo} data-aos="zoom-in-up" data-aos-offset="100">
             <div className="info__wrapper">
               <Figure onClick={() => goToDetail(item)}>
                 <Figure.Image

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
@@ -8,6 +8,8 @@ import { userLogin } from "../../store/member";
 import { useNavigate, Link } from "react-router-dom";
 import { FaLock, FaUnlockAlt } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const LoinSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -142,8 +144,18 @@ const LoinSection = () => {
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
-    <LoinSectionBlock className="row">
+    <LoinSectionBlock
+      className="row"
+      data-aos="zoom-out-up"
+      data-aos-anchor-placement="top-bottom"
+    >
       {!lock ? (
         <div className="Login__text">
           <p>
