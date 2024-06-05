@@ -8,19 +8,40 @@ const RecentBtnBlock = styled.div`
   position: fixed;
   bottom: 100px;
   right: 20px;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: all 0.5s;
+  animation: fadeInUp 0.5s;
+  z-index: 99999;
 
-  &.appear {
-    opacity: 1;
-    transform: translateY(0);
+  &.disappear {
+    opacity: 0;
+    animation: fadeInDown 0.5s;
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+    }
   }
 
   .rec__btn {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
     cursor: pointer;
     img {
       width: 100%;
@@ -30,7 +51,7 @@ const RecentBtnBlock = styled.div`
   }
 `;
 
-const RecentBtn = () => {
+const RecentBtn = ({ scrollPosition }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,7 +67,7 @@ const RecentBtn = () => {
   }, [user, dispatch]);
 
   return (
-    <RecentBtnBlock>
+    <RecentBtnBlock className={scrollPosition ? "" : "disappear"}>
       <div className="rec__btn" onClick={goToRecent}>
         {recentFood && recentFood.length > 0 && (
           <img src={recentFood[0]?.fdImg} alt={recentFood[0]?.fdName} />

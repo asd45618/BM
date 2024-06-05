@@ -66,16 +66,12 @@ const Layout = () => {
         <Header />
         <main>
           <Outlet />
-          {scrollPosition && location.pathname === "/" ? (
-            <RecentBtn className={scrollPosition ? "appear" : "disappear"} />
+          {location.pathname === "/" ? (
+            <RecentBtn scrollPosition={scrollPosition} />
           ) : (
             ""
           )}
-          {scrollPosition ? (
-            <TopBtn className={scrollPosition ? "appear" : "disappear"} />
-          ) : (
-            ""
-          )}
+          <TopBtn scrollPosition={scrollPosition} />
         </main>
         <Footer />
       </div>

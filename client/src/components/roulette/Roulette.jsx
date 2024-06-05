@@ -22,9 +22,10 @@ const RouletteBlock = styled.div`
     text-align: center;
     font-weight: bold;
     color: #9c9c9c;
+    font-family: var(--m-f-n);
   }
   span {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid var(--main);
     width: 40px;
     display: flex;
     text-align: center;
@@ -35,10 +36,11 @@ const RouletteBlock = styled.div`
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
+    font-family: var(--m-f-n);
   }
   svg {
-    color: red;
-    font-size: 36px;
+    color: #4b4b4b;
+    font-size: 50px;
   }
   canvas {
     transition: 2s;
@@ -52,6 +54,8 @@ const RouletteBlock = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+    font-family: var(--m-f-m);
+    color: #4b4b4b;
   }
   a {
     margin-top: 35px;
