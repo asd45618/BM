@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLikeFood, fetchRecent } from "../../store/food";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import ListImg from "@/assets/image/list_ico.gif";
 
 const RecentFoodSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -14,7 +15,13 @@ const RecentFoodSectionBlock = styled.div`
   font-family: var(--m-f-m);
   .h1__tag {
     text-align: center;
-    margin-bottom: 60px;
+    color: var(--main);
+  }
+  .under__line {
+    border-bottom: 2px solid var(--main);
+    width: 40px;
+    display: inline-block;
+    margin: 30px 0;
   }
   ul {
     padding: 0;
@@ -24,24 +31,30 @@ const RecentFoodSectionBlock = styled.div`
       .info__wrapper {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
         padding-bottom: 10px;
         .figure {
           flex: 0 0 30%;
+          width: 130px;
+          height: 130px;
           margin-right: 15px;
-          margin-bottom: 0;
+          margin-bottom: 25px;
           cursor: pointer;
           img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 25px;
           }
         }
         .info {
-          flex: 0 0 50%;
+          flex: 0 0 40%;
           .text {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 3px;
-            flex-wrap: wrap;
             h2 {
               margin-right: 10px;
               flex: 0 0 70%;
@@ -51,8 +64,10 @@ const RecentFoodSectionBlock = styled.div`
             }
           }
           p {
-            color: #aaa;
+            color: #828282;
             font-size: 14px;
+            font-family: var(--m-f-n);
+            word-break: keep-all;
           }
         }
         .like__btn {
@@ -64,12 +79,32 @@ const RecentFoodSectionBlock = styled.div`
           color: #ddd;
           svg {
             cursor: pointer;
+            transition: all 0.5s ease;
             &.on {
+              color: #fa5252;
+              &:hover {
+                color: #ddd;
+              }
+            }
+            &:hover {
               color: #fa5252;
             }
           }
         }
       }
+    }
+  }
+  .recent__nolist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .recent__nolist__listIco {
+      border: 1px solid #ccc;
+      padding: 25px;
+      border-radius: 50%;
+      margin-bottom: 50px;
+      margin-top: 10px;
     }
   }
 `;
@@ -119,40 +154,52 @@ const RecentFoodSection = () => {
   return (
     <RecentFoodSectionBlock>
       <div className="h1__tag">
-        <h1>최근 본 음식 목록</h1>
+        <h1>최근 본 음식 리스트</h1>
+        <span className="under__line"></span>
       </div>
-      <ul>
-        {recentList?.map((item) => (
-          <li key={item.fdNo}>
-            <div className="info__wrapper">
-              <Figure onClick={() => goToDetail(item)}>
-                <Figure.Image
-                  width={130}
-                  height={130}
-                  alt="171x180"
-                  src={item.fdImg}
-                />
-              </Figure>
-              <div className="info">
-                <div className="text">
-                  <h2>{item.fdName}</h2>
-                  <span>{item.fdKrCategory}</span>
+      {recentList?.length === 0 ? (
+        <div className="recent__nolist">
+          <figure className="recent__nolist__listIco">
+            <img src={ListImg} alt="리스트gif이미지" />
+          </figure>
+          <h1 style={{ fontSize: "1.5em", color: "#666666" }}>
+            최근 본 음식이 없습니다.
+          </h1>
+        </div>
+      ) : (
+        <ul>
+          {recentList?.map((item) => (
+            <li key={item.fdNo}>
+              <div className="info__wrapper">
+                <Figure onClick={() => goToDetail(item)}>
+                  <Figure.Image
+                    width={130}
+                    height={130}
+                    alt="171x180"
+                    src={item.fdImg}
+                  />
+                </Figure>
+                <div className="info">
+                  <div className="text">
+                    <h2>{item.fdName}</h2>
+                    <span>{item.fdKrCategory}</span>
+                  </div>
+                  <p>{item.fdDescription}</p>
                 </div>
-                <p>{item.fdDescription}</p>
+                <div className="like__btn">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    onClick={() => clickLikeBtn(item.fdNo)}
+                    className={
+                      like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""
+                    }
+                  />
+                </div>
               </div>
-              <div className="like__btn">
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  onClick={() => clickLikeBtn(item.fdNo)}
-                  className={
-                    like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""
-                  }
-                />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </RecentFoodSectionBlock>
   );
 };

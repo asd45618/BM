@@ -5,6 +5,31 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <style>
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #ededed;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        /* background: var(--main); */
+        background: #727272;
+        border-radius: 20px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #383f40;
+      }
+
+      /* 파이어폭스 */
+      body {
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+      }
+    </style>
     <script
       src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
       async=""

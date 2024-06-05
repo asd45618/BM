@@ -22,18 +22,11 @@ const NavBlock = styled.div`
   overflow: auto;
   z-index: 9999;
   &::-webkit-scrollbar {
-    width: 5px;
+    display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨기기 */
   }
-  &::-webkit-scrollbar-thumb {
-    background-color: white;
-    height: 5px;
-    padding: 0 10px;
-    border-radius: 20px;
-    margin: 0 10px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: var(--main);
-  }
+  -ms-overflow-style: none; /* IE and Edge에서 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+
   &.on {
     right: 0;
     opacity: 1;

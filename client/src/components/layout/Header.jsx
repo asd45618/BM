@@ -132,7 +132,7 @@ const Header = () => {
     <HeaderBlock>
       <div className="wrap">
         <h1 className="logo">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsOpen(false)}>
             <img src={Logoimage} alt="로고이미지" />
           </Link>
         </h1>

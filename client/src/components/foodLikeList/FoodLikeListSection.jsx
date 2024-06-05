@@ -7,6 +7,7 @@ import Figure from "react-bootstrap/Figure";
 import axios from "axios";
 import { fetchLikeFood } from "../../store/food";
 import { useNavigate } from "react-router-dom";
+import HeartImg from "@/assets/image/like_ico.gif";
 
 const FoodLikeListSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -14,7 +15,13 @@ const FoodLikeListSectionBlock = styled.div`
   font-family: var(--m-f-m);
   .h1__tag {
     text-align: center;
-    margin-bottom: 60px;
+    color: var(--main);
+  }
+  .under__line {
+    border-bottom: 2px solid var(--main);
+    width: 40px;
+    display: inline-block;
+    margin: 30px 0;
   }
   ul {
     padding: 0;
@@ -24,22 +31,29 @@ const FoodLikeListSectionBlock = styled.div`
       .info__wrapper {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
         padding-bottom: 10px;
         .figure {
           flex: 0 0 30%;
+          width: 130px;
+          height: 130px;
           margin-right: 15px;
-          margin-bottom: 0;
+          margin-bottom: 25px;
           cursor: pointer;
           img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 25px;
           }
         }
         .info {
-          flex: 0 0 50%;
+          flex: 0 0 40%;
           .text {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 3px;
             h2 {
               margin-right: 10px;
@@ -50,8 +64,10 @@ const FoodLikeListSectionBlock = styled.div`
             }
           }
           p {
-            color: #aaa;
+            color: #828282;
             font-size: 14px;
+            font-family: var(--m-f-n);
+            word-break: keep-all;
           }
         }
         .like__btn {
@@ -63,12 +79,32 @@ const FoodLikeListSectionBlock = styled.div`
           color: #ddd;
           svg {
             cursor: pointer;
+            transition: all 0.5s ease;
             &.on {
+              color: #fa5252;
+              &:hover {
+                color: #ddd;
+              }
+            }
+            &:hover {
               color: #fa5252;
             }
           }
         }
       }
+    }
+  }
+  .Like__nolist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .Like__nolist__heartIco {
+      border: 1px solid #ccc;
+      padding: 25px;
+      border-radius: 50%;
+      margin-bottom: 50px;
+      margin-top: 10px;
     }
   }
 `;
@@ -110,7 +146,7 @@ const FoodLikeListSection = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8001/food/allLike?userId=${user.userId}`)
+      .get(`http://localhost:8001/food/allLike?userId=${user?.userId}`)
       .then((res) => {
         setUserLikeList(res.data);
       })
@@ -118,45 +154,57 @@ const FoodLikeListSection = () => {
     user
       ? dispatch(fetchLikeFood(user?.userId))
       : dispatch(fetchLikeFood(null));
-  }, []);
+  }, [like]);
 
   return (
     <FoodLikeListSectionBlock>
       <div className="h1__tag">
-        <h1>좋아요</h1>
+        <h1>좋아요리스트</h1>
+        <span className="under__line"></span>
       </div>
-      <ul>
-        {userLikeList?.map((item) => (
-          <li key={item.fdNo}>
-            <div className="info__wrapper">
-              <Figure onClick={() => goToDetail(item)}>
-                <Figure.Image
-                  width={130}
-                  height={130}
-                  alt="171x180"
-                  src={item.fdImg}
-                />
-              </Figure>
-              <div className="info">
-                <div className="text">
-                  <h2>{item.fdName}</h2>
-                  <span>{item.fdKrCategory}</span>
+      {userLikeList?.length === 0 ? (
+        <div className="Like__nolist">
+          <figure className="Like__nolist__heartIco">
+            <img src={HeartImg} alt="" />
+          </figure>
+          <h1 style={{ fontSize: "1.5em", color: "#666666" }}>
+            좋아요를 표시한 음식이 없습니다.
+          </h1>
+        </div>
+      ) : (
+        <ul>
+          {userLikeList?.map((item) => (
+            <li key={item.fdNo}>
+              <div className="info__wrapper">
+                <Figure onClick={() => goToDetail(item)}>
+                  <Figure.Image
+                    width={130}
+                    height={130}
+                    alt="171x180"
+                    src={item.fdImg}
+                  />
+                </Figure>
+                <div className="info">
+                  <div className="text">
+                    <h2>{item.fdName}</h2>
+                    <span>{item.fdKrCategory}</span>
+                  </div>
+                  <p>{item.fdDescription}</p>
                 </div>
-                <p>{item.fdDescription}</p>
+                <div className="like__btn">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    onClick={() => clickLikeBtn(item.fdNo)}
+                    className={
+                      like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""
+                    }
+                  />
+                </div>
               </div>
-              <div className="like__btn">
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  onClick={() => clickLikeBtn(item.fdNo)}
-                  className={
-                    like?.find((val) => val.fdNo === item.fdNo) ? "on" : ""
-                  }
-                />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </FoodLikeListSectionBlock>
   );
 };
