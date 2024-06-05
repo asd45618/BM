@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchFood } from "../../store/food";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FoodRecommendSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -128,17 +130,25 @@ const FoodRecommendSection = () => {
     dispatch(fetchFood(foodId));
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <FoodRecommendSectionBlock>
-      <h1>배민 룰렛</h1>
-      <p className="category__text">카테고리 선택</p>
-      <span></span>
-      <p className="desc">
-        카테고리를 선택하면 해당하는 카테고리의 음식 랜덤 룰렛이 돌아갑니다.
-      </p>
+      <div data-aos="fade-down">
+        <h1>배민 룰렛</h1>
+        <p className="category__text">카테고리 선택</p>
+        <span></span>
+        <p className="desc">
+          카테고리를 선택하면 해당하는 카테고리의 음식 랜덤 룰렛이 돌아갑니다.
+        </p>
+      </div>
       <ul className="food__Depth1">
         {foodList.map((item, index) => (
-          <li key={index}>
+          <li key={index} data-aos="fade-up">
             <Link
               to={`/roulette/${item.foodId}`}
               onClick={() => goToRoulette(item.foodId)}

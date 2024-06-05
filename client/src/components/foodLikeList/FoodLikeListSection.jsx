@@ -8,6 +8,8 @@ import axios from "axios";
 import { fetchLikeFood } from "../../store/food";
 import { useNavigate } from "react-router-dom";
 import HeartImg from "@/assets/image/like_ico.gif";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FoodLikeListSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -156,6 +158,12 @@ const FoodLikeListSection = () => {
       : dispatch(fetchLikeFood(null));
   }, [like]);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <FoodLikeListSectionBlock>
       <div className="h1__tag">
@@ -175,7 +183,11 @@ const FoodLikeListSection = () => {
         <ul>
           {userLikeList?.map((item) => (
             <li key={item.fdNo}>
-              <div className="info__wrapper">
+              <div
+                className="info__wrapper"
+                data-aos="zoom-in-up"
+                data-aos-anchor-placement="top-bottom"
+              >
                 <Figure onClick={() => goToDetail(item)}>
                   <Figure.Image
                     width={130}

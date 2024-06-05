@@ -5,6 +5,9 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RouletteModal from "./RouletteModal";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const RouletteBlock = styled.div`
   position: relative;
@@ -52,7 +55,7 @@ const RouletteBlock = styled.div`
     position: absolute;
     width: 70px;
     height: 70px;
-    top: 59%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
@@ -156,18 +159,33 @@ const Roulette = () => {
     setShowModal(value);
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <RouletteBlock>
-      <h1>배민 룰렛</h1>
-      <p className="category__text">랜덤 메뉴 추천</p>
-      <span></span>
-      <p className="desc">가운데 start 버튼을 클릭하면 룰렛이 돌아갑니다.</p>
-      <FontAwesomeIcon icon={faCaretDown} />
-      <canvas width="400" height="400" ref={canvasRef}></canvas>
+      <h1 data-aos="zoom-out">배민 룰렛</h1>
+      <p data-aos="zoom-out" className="category__text">
+        랜덤 메뉴 추천
+      </p>
+      <span data-aos="zoom-out"></span>
+      <p data-aos="zoom-out" className="desc">
+        가운데 start 버튼을 클릭하면 룰렛이 돌아갑니다.
+      </p>
+      <FontAwesomeIcon data-aos="zoom-out" icon={faCaretDown} />
+      <canvas
+        data-aos="zoom-out"
+        width="400"
+        height="400"
+        ref={canvasRef}
+      ></canvas>
       <button className="start__btn" onClick={rotate}>
         start
       </button>
-      <Link to={"/foodRecommend"} className="category">
+      <Link data-aos="zoom-out" to={"/foodRecommend"} className="category">
         카테고리 선택하러 가기
       </Link>
       {showModal && (

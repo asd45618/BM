@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { localUser, userLogout } from "../../store/member";
 import { FaUserPen } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MemberModifyBlock = styled.div`
   margin: 150px 0 50px;
@@ -224,8 +226,18 @@ const MemberModify = () => {
     };
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
-    <MemberModifyBlock className="row">
+    <MemberModifyBlock
+      className="row"
+      data-aos="zoom-out-up"
+      data-aos-anchor-placement="top-bottom"
+    >
       <div className="modify__text">
         <p>
           <FaUserPen />
