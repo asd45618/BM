@@ -158,7 +158,7 @@ const HomeSection02 = () => {
         <h1>
           <strong>배달의민족</strong>의 메뉴추천
         </h1>
-        <p>배달족들을 위한 배민의 메뉴추천</p>
+        <p>배달족들을 위한 배민의 메뉴추천1</p>
         <span className="under__line"></span>
       </div>
       <Slider {...options}>
