@@ -121,19 +121,9 @@ const HomeSection01 = () => {
     dispatch(fetchFood(category));
   };
 
-  {
-    /* <Link to=`/foodlist/${item.foodId}` state:{{ foodId: item.foodId }}>
-  
-</Link>;
-
-onclick(()=>함수이름(itme.foodID))
-const 함수이름 = (foodId) => {
-  Navigate("/foodlist/foodId", {state: {foodId}})
-} */
-  }
   useEffect(() => {
     AOS.init({
-      duration: 600,
+      duration: 1000,
     });
   }, []);
   return (

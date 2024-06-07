@@ -41,7 +41,7 @@ const HomeSection02Block = styled.div`
     height: 35vw;
     background-size: cover;
     background-position: center;
-    margin: 0 2px auto; /* 슬라이드 간 여백 설정 */
+    margin: 0 2px auto;
     cursor: pointer;
     transition: all 0.5s ease;
     &:hover {
@@ -112,12 +112,6 @@ const HomeSection02Block = styled.div`
       }
     }
   }
-  /* .slick-slide:nth-child(even) .slide {
-    transform: translateY(-20px);
-  }
-  .slick-slide:nth-child(odd) .slide {
-    transform: translateY(20px);
-  } */
 `;
 
 const HomeSection02 = () => {
@@ -144,7 +138,7 @@ const HomeSection02 = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 600,
+      duration: 1000,
     });
   }, []);
 
@@ -158,7 +152,7 @@ const HomeSection02 = () => {
         <h1>
           <strong>배달의민족</strong>의 메뉴추천
         </h1>
-        <p>배달족들을 위한 배민의 메뉴추천</p>
+        <p>배달족들을 위한 배민의 메뉴추천1</p>
         <span className="under__line"></span>
       </div>
       <Slider {...options}>

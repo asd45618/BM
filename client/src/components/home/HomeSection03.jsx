@@ -62,7 +62,7 @@ const HomeSection03Block = styled.div`
 const Homesection03 = () => {
   useEffect(() => {
     AOS.init({
-      duration: 600,
+      duration: 1000,
     });
   }, []);
 
@@ -87,7 +87,7 @@ const Homesection03 = () => {
         autoPlay
         loop
         controls
-        data-aos="fade-down"
+        data-aos="zoom-out"
         data-aos-anchor-placement="top"
       >
         <source src={video} type="video/mp4" />

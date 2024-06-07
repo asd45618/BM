@@ -77,7 +77,6 @@ const WayToComeBlock = styled.div`
       padding: 25px;
       border: 1px solid #ccc;
       border-top: none;
-      /* left와 top 값을 계산하여 설정합니다. */
       left: 0;
       top: 0;
       z-index: 10;
@@ -186,15 +185,12 @@ const WayToCome = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 700,
+      duration: 1000,
     });
   }, []);
 
   return (
-    <WayToComeBlock
-      markerLeft={markerPosition.left}
-      markerTop={markerPosition.top}
-    >
+    <WayToComeBlock>
       <div className="map_wrap">
         <div
           className="WayToCome__mainTitle"
@@ -214,6 +210,8 @@ const WayToCome = () => {
         <div
           id="map"
           ref={mapRef}
+          data-aos="zoom-out"
+          data-aos-anchor-placement="top"
           style={{
             width: "100%",
             height: "100%",
@@ -223,7 +221,11 @@ const WayToCome = () => {
           }}
         ></div>
         <div className="marker__info">
-          <div className="marker__info__left">
+          <div
+            className="marker__info__left"
+            data-aos="fade-down"
+            data-aos-anchor-placement="top"
+          >
             <h2>배달의민족</h2>
             <p>송파구 위례성대로 2 장은빌딩 18층</p>
           </div>

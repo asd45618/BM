@@ -102,7 +102,7 @@ const HomeSection04Block = styled.div`
 const HomeSection04 = () => {
   useEffect(() => {
     AOS.init({
-      duration: 600,
+      duration: 1000,
     });
   }, []);
   return (
@@ -120,7 +120,11 @@ const HomeSection04 = () => {
         <p>배달의 민족 친환경 프로젝트, 캠페인</p>
         <span className="under__line"></span>
       </div>
-      <div className="popup" data-aos="fade-up" data-aos-anchor-placement="top">
+      <div
+        className="popup"
+        data-aos="zoom-out"
+        data-aos-anchor-placement="top"
+      >
         <figure className="popup__imagebox">
           <img src={BhBg} alt="팝업배경" />
         </figure>

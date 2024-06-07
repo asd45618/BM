@@ -173,7 +173,7 @@ const AboutUsSection = () => {
   const [ani, setAni] = useState(false);
   useEffect(() => {
     AOS.init({
-      duration: 700,
+      duration: 1000,
     });
   }, []);
 
