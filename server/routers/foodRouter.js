@@ -139,7 +139,6 @@ foodRouter.post("/recent", (req, res) => {
               res.status(500).send("실패");
               throw err;
             } else {
-              console.log(countResult[0].count);
               const count = countResult[0].count;
               if (count > MAX_RECENTLY_VIEWED) {
                 db.query(

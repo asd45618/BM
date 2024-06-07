@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const TopBtnBlock = styled.div`
   position: fixed;
-  right: 20px;
+  right: 25px;
   bottom: 40px;
   animation: fadeInUp 0.5s;
   z-index: 99999;
@@ -36,8 +36,8 @@ const TopBtnBlock = styled.div`
   }
   .top__btn {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: var(--main);
     border-radius: 50%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);

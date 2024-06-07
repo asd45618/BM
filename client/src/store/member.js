@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const memberSlice = createSlice({
   name: "member",
   initialState: {

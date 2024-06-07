@@ -97,6 +97,8 @@ const LoginSectionBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const LoginSection = () => {
   const navigate = useNavigate();
 
@@ -172,7 +174,7 @@ const LoginSection = () => {
     };
 
     axios
-      .post("http://localhost:8001/auth/join", { addMember })
+      .post(`${serverUrl}/auth/join`, { addMember })
       .then((res) => {
         if (res.data.affectedRows === 1) {
           alert("회원가입이 완료되었습니다.");
@@ -189,7 +191,7 @@ const LoginSection = () => {
   const idCheck = (value) => {
     value
       ? axios
-          .post("http://localhost:8001/auth/idcheck", { userId: value })
+          .post(`${serverUrl}/auth/idcheck`, { userId: value })
           .then((res) => {
             res.data[0]
               ? setIdMessage("중복된 이메일입니다.")
@@ -203,7 +205,7 @@ const LoginSection = () => {
   const nameCheck = (value) => {
     value
       ? axios
-          .post("http://localhost:8001/auth/namecheck", { userName: value })
+          .post(`${serverUrl}/auth/namecheck`, { userName: value })
           .then((res) => {
             res.data[0]
               ? setNameMessage("중복된 닉네임입니다.")

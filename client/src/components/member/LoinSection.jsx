@@ -110,6 +110,8 @@ const LoinSectionBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const LoinSection = () => {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
@@ -124,7 +126,7 @@ const LoinSection = () => {
   const loginSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8001/auth/login", {
+      .post(`${serverUrl}/auth/login`, {
         userId: userId,
         userPw: userPw,
       })
@@ -198,7 +200,7 @@ const LoinSection = () => {
         </div>
       </Form>
       <Link to="/join" className="joinLink">
-        <p>회원가입 하러 가기</p>{" "}
+        <p>회원가입 하러 가기</p>
         <span>
           <FaArrowRightLong />
         </span>

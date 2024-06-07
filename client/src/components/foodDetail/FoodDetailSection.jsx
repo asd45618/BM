@@ -26,7 +26,6 @@ const FoodDetailSectionBlock = styled.div`
       padding: 30px 0;
       .text {
         margin: 10px 0 30px;
-
         p {
           margin-bottom: 0.7rem;
           font-size: 30px;
@@ -77,6 +76,8 @@ const FoodDetailSectionBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const FoodDetailSection = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const FoodDetailSection = ({ item }) => {
   const clickLikeBtn = (item) => {
     if (user) {
       axios
-        .post("http://localhost:8001/food/likeClick", {
+        .post(`${serverUrl}/food/likeClick`, {
           fdNo: item,
           userId: user.userId,
         })
@@ -110,7 +111,7 @@ const FoodDetailSection = ({ item }) => {
   useEffect(() => {
     if (user) {
       axios
-        .post("http://localhost:8001/food/recent", {
+        .post(`${serverUrl}/food/recent`, {
           fdNo: item.fdNo,
           userId: user?.userId,
         })

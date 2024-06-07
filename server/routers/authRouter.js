@@ -86,7 +86,7 @@ authRouter.post("/refresh", (req, res) => {
 });
 
 authRouter.post("/modify", (req, res) => {
-  const { userId, userPw, userName, zipCode, addr1, addr2 } = req.body.userInfo;
+  const { userId, userName, zipCode, addr1, addr2 } = req.body.userInfo;
   db.query(
     "UPDATE membertbl SET userId=?, userName=?, zipCode=?, addr1=?, addr2=? WHERE userId=?",
     [userId, userName, zipCode, addr1, addr2, userId],

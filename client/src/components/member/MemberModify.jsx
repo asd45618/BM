@@ -102,6 +102,8 @@ const MemberModifyBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const MemberModify = () => {
   const user = useSelector((state) => state.members.user);
   const navigate = useNavigate();
@@ -138,23 +140,21 @@ const MemberModify = () => {
       userNameRef.current.focus();
       return false;
     }
-    axios
-      .post("http://localhost:8001/auth/modify", { userInfo })
-      .then((res) => {
-        if (res.data.affectedRows === 1) {
-          alert("정보가 수정되었습니다.");
-          dispatch(localUser(JSON.parse(res.config.data).userInfo));
-          navigate("/");
-        } else {
-          alert("정보가 수정되지 않았습니다.");
-        }
-      });
+    axios.post(`${serverUrl}/auth/modify`, { userInfo }).then((res) => {
+      if (res.data.affectedRows === 1) {
+        alert("정보가 수정되었습니다.");
+        dispatch(localUser(JSON.parse(res.config.data).userInfo));
+        navigate("/");
+      } else {
+        alert("정보가 수정되지 않았습니다.");
+      }
+    });
   };
 
   const nameCheck = (value) => {
     value
       ? axios
-          .post("http://localhost:8001/auth/namecheck", { userName: value })
+          .post(`${serverUrl}/auth/namecheck`, { userName: value })
           .then((res) => {
             if (res.data[0]?.userName === user.userName || !res.data[0]) {
               setNameMessage("");
@@ -175,7 +175,7 @@ const MemberModify = () => {
     }
     if (answer) {
       axios
-        .post("http://localhost:8001/auth/remove", { userId: userInfo.userId })
+        .post(`${serverUrl}/auth/remove`, { userId: userInfo.userId })
         .then((res) => {
           if (res.data.affectedRows === 1) {
             dispatch(userLogout());
