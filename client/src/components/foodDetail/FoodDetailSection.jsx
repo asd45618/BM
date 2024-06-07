@@ -142,7 +142,11 @@ const FoodDetailSection = ({ item }) => {
             </div>
           </div>
         </div>
-        <div className="like__btn" data-aos="zoom-in">
+        <div
+          className="like__btn"
+          data-aos="zoom-in"
+          data-aos-anchor-placement="bottom"
+        >
           <FontAwesomeIcon
             icon={faHeart}
             onClick={() => clickLikeBtn(fdNo)}

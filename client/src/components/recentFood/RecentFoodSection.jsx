@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Figure from "react-bootstrap/Figure";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLikeFood, fetchRecent } from "../../store/food";
@@ -10,6 +10,7 @@ import axios from "axios";
 import ListImg from "@/assets/image/list_ico.gif";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { faCircleCheck, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 const RecentFoodSectionBlock = styled.div`
   margin: 150px 0 50px;
@@ -27,9 +28,79 @@ const RecentFoodSectionBlock = styled.div`
   }
   ul {
     padding: 0;
+    .modify__btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 30px;
+      p {
+        cursor: pointer;
+      }
+      .all__selected {
+        font-size: 28px;
+        cursor: pointer;
+        color: #929292;
+        span {
+          font-size: 24px;
+          color: #212529;
+          margin-right: 10px;
+        }
+        svg {
+          &.all__selected {
+            color: var(--main);
+          }
+        }
+      }
+      .abc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        p {
+          text-align: center;
+          margin: 0;
+          padding: 5px;
+          border: 1px solid #ddd;
+          margin-left: 10px;
+          &:nth-child(4) {
+            border: none;
+            margin: auto 0 auto 8px;
+          }
+        }
+      }
+    }
     li {
       border-bottom: 1px solid #ddd;
       margin-bottom: 2rem;
+      .delete {
+        .check {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 20px;
+          margin: 10px 0;
+          svg {
+            cursor: pointer;
+            color: #929292;
+          }
+          .delete__btn {
+            svg {
+              font-size: 20px;
+            }
+          }
+          p {
+            font-size: 16px;
+            margin: 0;
+          }
+          svg {
+            &.click {
+              color: var(--main);
+            }
+          }
+        }
+      }
       .info__wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -119,6 +190,10 @@ const RecentFoodSection = () => {
   const like = useSelector((state) => state.foods.likeFood);
   const recentList = useSelector((state) => state.foods.recentList);
 
+  const [selected, setSelected] = useState([]);
+  const [recentModify, setRecentModify] = useState(true);
+  const [all, setAll] = useState(false);
+
   const goToDetail = (item) => {
     navgiate(`/foodDetail/${item.fdCategory}/${item.fdNo}`, {
       state: { item: item },
@@ -146,6 +221,65 @@ const RecentFoodSection = () => {
     }
   };
 
+  const deleteRecent = (item) => {
+    axios
+      .post(`${serverUrl}/food/deleteRecent`, {
+        fdNo: item.fdNo,
+        userId: item.userId,
+      })
+      .then(() => dispatch(fetchRecent(user?.userId)))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const allDelete = () => {
+    axios
+      .post(`${serverUrl}/food/recentAllDelete`, { userId: user?.userId })
+      .then(() => dispatch(fetchRecent(user?.userId)))
+      .catch((err) => console.log(err));
+  };
+
+  const selectDelete = () => {
+    axios
+      .post(`${serverUrl}/food/recentSelectDelete`, {
+        selected: selected,
+        userId: user?.userId,
+      })
+      .then(() => dispatch(fetchRecent(user?.userId)))
+      .catch((err) => alert(err.response.data));
+  };
+
+  const selectedBtn = (fdNo) => {
+    selected.includes(fdNo)
+      ? setSelected(selected.filter((item) => item !== fdNo))
+      : setSelected((prevList) => [...prevList, fdNo]);
+  };
+
+  const modify = () => {
+    setRecentModify(false);
+  };
+
+  const cancle = () => {
+    setRecentModify(true);
+  };
+
+  const allSelect = () => {
+    setAll(!all);
+    if (selected.length && selected.length !== recentList.length) {
+      setSelected([]);
+      for (let i = 0; i < recentList.length; i++) {
+        setSelected((prevList) => [...prevList, recentList[i].fdNo]);
+      }
+    } else if (selected.length === recentList.length) {
+      setSelected([]);
+    } else if (selected.length === 0) {
+      for (let i = 0; i < recentList.length; i++) {
+        setSelected((prevList) => [...prevList, recentList[i].fdNo]);
+      }
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchRecent(user?.userId));
     user
@@ -170,14 +304,67 @@ const RecentFoodSection = () => {
           <figure className="recent__nolist__listIco">
             <img src={ListImg} alt="리스트gif이미지" />
           </figure>
-          <h1 style={{ fontSize: "1.5em", color: "#666666" }}>
+          <h1 style={{ fontSize: "1.5em", color: "#666" }}>
             최근 본 음식이 없습니다.
           </h1>
         </div>
       ) : (
         <ul>
+          <div className="modify__btn">
+            {recentModify ? (
+              <p data-aos="fade-left" onClick={modify}>
+                편집
+              </p>
+            ) : (
+              <>
+                <div
+                  className="all__selected"
+                  data-aos="fade-left"
+                  onClick={allSelect}
+                >
+                  <span>All</span>
+                  <FontAwesomeIcon
+                    icon={faCircleCheck}
+                    className={all ? "all__selected" : ""}
+                  />
+                </div>
+                <div className="abc">
+                  <p data-aos="fade-left" onClick={allDelete}>
+                    전체삭제
+                  </p>
+                  <p data-aos="fade-left" onClick={selectDelete}>
+                    선택삭제
+                  </p>
+                  <p data-aos="fade-left" onClick={cancle}>
+                    <FontAwesomeIcon icon={faXmark} />
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
           {recentList?.map((item) => (
             <li key={item.fdNo} data-aos="zoom-in-up" data-aos-offset="120">
+              <div className="delete">
+                {recentModify ? (
+                  ""
+                ) : (
+                  <>
+                    <div className="check" data-aos="fade-left">
+                      <FontAwesomeIcon
+                        icon={faCircleCheck}
+                        onClick={() => selectedBtn(item.fdNo)}
+                        className={selected?.includes(item.fdNo) ? "click" : ""}
+                      />
+                      <p
+                        className="delete__btn"
+                        onClick={() => deleteRecent(item)}
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
               <div className="info__wrapper">
                 <Figure onClick={() => goToDetail(item)}>
                   <Figure.Image
