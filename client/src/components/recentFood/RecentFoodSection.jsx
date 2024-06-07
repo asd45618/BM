@@ -64,7 +64,7 @@ const RecentFoodSectionBlock = styled.div`
           padding: 5px;
           border: 1px solid #ddd;
           margin-left: 10px;
-          &:nth-child(4) {
+          &:nth-child(3) {
             border: none;
             margin: auto 0 auto 8px;
           }
