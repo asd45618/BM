@@ -184,7 +184,12 @@ const Roulette = () => {
       <button className="start__btn" onClick={rotate}>
         start
       </button>
-      <Link data-aos="zoom-out" to={"/foodRecommend"} className="category">
+      <Link
+        data-aos="zoom-out"
+        data-aos-anchor-placement="top"
+        to={"/foodRecommend"}
+        className="category"
+      >
         카테고리 선택하러 가기
       </Link>
       {showModal && <RouletteModal result={result} reSpin={reSpin} />}

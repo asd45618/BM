@@ -44,6 +44,7 @@ const HomeSection02Block = styled.div`
     margin: 0 2px auto;
     cursor: pointer;
     transition: all 0.5s ease;
+
     &:hover {
       transform: translateY(20px);
     }
@@ -56,8 +57,10 @@ const HomeSection02Block = styled.div`
       width: 100%;
       height: 200px;
       overflow: hidden;
+      padding: 10px;
+
       img {
-        width: 100%;
+        width: 250px;
         height: 100%;
         object-fit: cover;
       }
@@ -68,7 +71,6 @@ const HomeSection02Block = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px;
   }
   .slick-list {
     margin: 0 -10px;

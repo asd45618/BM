@@ -171,4 +171,59 @@ foodRouter.get("/recentList", (req, res) => {
   });
 });
 
+foodRouter.post("/deleteRecent", (req, res) => {
+  const { fdNo, userId } = req.body;
+  db.query(
+    "DELETE from recenttbl WHERE fdNo = ? AND userId = ?",
+    [fdNo, userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+foodRouter.post("/recentAllDelete", (req, res) => {
+  const userId = req.body.userId;
+  db.query(
+    "DELETE from recenttbl WHERE userId = ?",
+    [userId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("실패");
+        throw err;
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+foodRouter.post("/recentSelectDelete", (req, res) => {
+  const selected = req.body.selected;
+  const userId = req.body.userId;
+
+  if (!Array.isArray(selected) || selected.length === 0) {
+    return res.status(400).send("선택된 항목이 없습니다.");
+  }
+
+  const placeholders = selected.map(() => "?").join(",");
+  const query = `DELETE from recenttbl WHERE userId = ? AND fdNo IN (${placeholders})`;
+
+  const queryParams = [userId, ...selected];
+
+  db.query(query, queryParams, (err, result) => {
+    if (err) {
+      res.status(500).send("실패");
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 export default foodRouter;

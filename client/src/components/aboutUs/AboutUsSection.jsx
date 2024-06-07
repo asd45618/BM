@@ -193,13 +193,13 @@ const AboutUsSection = () => {
           </figure>
           <div className="AboutUsSection__section0">
             <figure className="AboutUsSection__imgbox">
-              <img src={Section1Img} alt="" className={ani && "on"} />
+              <img src={Section1Img} alt="" className={ani ? "on" : ""} />
               <div className="dem"></div>
             </figure>
 
             <div className={cn("AboutUsSection0__textbox", "AS")}>
-              <h1 className={ani && "on"}>마음에도 당충전이 필요할때</h1>
-              <div className={cn("AboutUsSection__btn", ani && "on")}>
+              <h1 className={ani ? "on" : ""}>마음에도 당충전이 필요할때</h1>
+              <div className={cn("AboutUsSection__btn", ani ? "on" : "")}>
                 <a
                   href="https://apps.apple.com/kr/app/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1/id378084485?mt=8"
                   target="_blank"
