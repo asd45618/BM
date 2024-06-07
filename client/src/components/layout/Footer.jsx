@@ -285,13 +285,21 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer__sns">
-            <a href="" className="facebook">
+            <a
+              href="https://www.facebook.com/smartbaedal/?locale=ko_KR"
+              className="facebook"
+              target="_blank"
+            >
               <CiFacebook />
             </a>
-            <a href="" className="instargram">
+            <a
+              href="https://www.instagram.com/baemin_official/?hl=ko"
+              className="instargram"
+              target="_blank"
+            >
               <CiInstagram />
             </a>
-            <a href="" className="x">
+            <a href="https://x.com/baemin_korea" className="x" target="_blank">
               <CiTwitter />
             </a>
           </div>

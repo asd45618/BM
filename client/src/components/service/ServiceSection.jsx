@@ -56,8 +56,11 @@ const ServiceSectionBlock = styled.div`
         margin: 20px 0;
       }
       p {
-        font-size: 1.5em;
+        font-size: 1.2em;
+        font-family: var(--m-f-n);
         word-break: keep-all;
+        font-weight: 600;
+        color: #4b4b4b;
       }
     }
     .service__service__main {
@@ -142,7 +145,7 @@ const ServiceSection = () => {
       menu: "./assets/image/service_logo_01.png",
       id: 0,
       name: "배민배달",
-      serviceSub: "배민이 직접 챙기니까배달을 더 빠르게, 더 알뜰하게",
+      serviceSub: "배민이 직접 챙기니까 배달을 더 빠르게, 더 알뜰하게",
     },
     {
       menu: "./assets/image/service_logo_02.png",
@@ -196,7 +199,7 @@ const ServiceSection = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 700,
+      duration: 1000,
     });
   }, []);
 
@@ -233,7 +236,7 @@ const ServiceSection = () => {
           <div
             className="service__service__main"
             key={`${key}-${index}`}
-            data-aos="fade-down"
+            data-aos="zoom-out"
             data-aos-anchor-placement="top"
           >
             <figure className="service__subPhoto_imgbox">
