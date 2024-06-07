@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const RecentBtnBlock = styled.div`
   position: fixed;
-  bottom: 100px;
+  bottom: 110px;
   right: 20px;
   animation: fadeInUp 0.5s;
   z-index: 99999;
@@ -38,8 +38,8 @@ const RecentBtnBlock = styled.div`
   }
 
   .rec__btn {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
     cursor: pointer;

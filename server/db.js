@@ -8,11 +8,3 @@ export const db = mysql.createPool({
   database: "bm",
   connectionLimit: 10,
 });
-
-// db.connect((err) => {
-//   if (err) {
-//     console.error("Database connection error: ", err);
-//     return;
-//   }
-//   console.log("Connection to the database.");
-// });

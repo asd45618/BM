@@ -9,7 +9,6 @@ import Logoimage from "@/assets/image/logo.png";
 import Nav from "@/components/layout/Nav.jsx";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { localUser, userLogout } from "../../store/member";
-import { fetchLikeFood } from "../../store/food";
 
 const HeaderBlock = styled.div`
   background: var(--main);
@@ -97,6 +96,8 @@ const HeaderBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -108,7 +109,6 @@ const Header = () => {
   const logoutClick = () => {
     dispatch(userLogout());
     dispatch(localUser(null));
-    console.log(user);
     navigate("/");
   };
 
@@ -120,7 +120,7 @@ const Header = () => {
     if (localStorage.getItem("loging")) {
       const { userId } = JSON.parse(localStorage.getItem("loging"));
       axios
-        .post("http://localhost:8001/auth/refresh", { userId })
+        .post(`${serverUrl}/auth/refresh`, { userId })
         .then((res) => {
           dispatch(localUser(res.data[0]));
         })

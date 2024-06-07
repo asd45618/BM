@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -124,19 +124,20 @@ const ModalFooter = styled.div`
 
 const RouletteModal = ({ result, reSpin }) => {
   const navigate = useNavigate();
+
+  const [close, setClose] = useState(false);
+
   const goToFood = () => {
     navigate(`/foodDetail/${result.fdCategory}/${result.fdNo}`, {
       state: { item: result },
     });
   };
 
-  const [close, setClose] = useState(false);
-
   const closeRullet = () => {
     setClose(true);
     setTimeout(() => {
       reSpin(false);
-    }, 300); // 0.5 seconds delay
+    }, 300);
   };
 
   return (

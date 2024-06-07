@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -62,8 +62,6 @@ const FoodListSectionBlock = styled.div`
               flex: 0 0 70%;
               margin-bottom: 0;
             }
-            span {
-            }
           }
           p {
             color: #828282;
@@ -98,8 +96,9 @@ const FoodListSectionBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const FoodListSection = ({ category }) => {
-  const params = useParams();
   const dispatch = useDispatch();
   const navgiate = useNavigate();
 
@@ -110,7 +109,7 @@ const FoodListSection = ({ category }) => {
   const clickLikeBtn = (item) => {
     if (user) {
       axios
-        .post("http://localhost:8001/food/likeClick", {
+        .post(`${serverUrl}/food/likeClick`, {
           fdNo: item,
           userId: user.userId,
         })

@@ -62,8 +62,6 @@ const FoodLikeListSectionBlock = styled.div`
               flex: 0 0 70%;
               margin-bottom: 0;
             }
-            span {
-            }
           }
           p {
             color: #828282;
@@ -111,6 +109,8 @@ const FoodLikeListSectionBlock = styled.div`
   }
 `;
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const FoodLikeListSection = () => {
   const dispatch = useDispatch();
   const navgiate = useNavigate();
@@ -122,7 +122,7 @@ const FoodLikeListSection = () => {
   const clickLikeBtn = (item) => {
     if (user) {
       axios
-        .post("http://localhost:8001/food/likeClick", {
+        .post(`${serverUrl}/food/likeClick`, {
           fdNo: item,
           userId: user.userId,
         })
@@ -148,7 +148,7 @@ const FoodLikeListSection = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8001/food/allLike?userId=${user?.userId}`)
+      .get(`${serverUrl}/food/allLike?userId=${user?.userId}`)
       .then((res) => {
         setUserLikeList(res.data);
       })

@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const serverUrl = import.meta.env.VITE_API_URL;
+
 const foodSlice = createSlice({
   name: "food",
   initialState: {
@@ -30,14 +32,14 @@ export const { initAllFoods, initFoods, initLikeFoods, initRecent } =
 
 export const fetchAllFood = () => (dispatch) => {
   axios
-    .get("http://localhost:8001/food/allList")
+    .get(`${serverUrl}/food/allList`)
     .then((res) => dispatch(initAllFoods(res.data)))
     .catch((err) => console.log(err));
 };
 
 export const fetchFood = (fdCategory) => (dispatch) => {
   axios
-    .get(`http://localhost:8001/food/list?fdCategory=${fdCategory}`)
+    .get(`${serverUrl}/food/list?fdCategory=${fdCategory}`)
     .then((res) => {
       dispatch(initFoods(res.data));
     })
@@ -46,7 +48,7 @@ export const fetchFood = (fdCategory) => (dispatch) => {
 
 export const fetchLikeFood = (userId) => (dispatch) => {
   axios
-    .get(`http://localhost:8001/food/like?userId=${userId}`)
+    .get(`${serverUrl}/food/like?userId=${userId}`)
     .then((res) => {
       dispatch(initLikeFoods(res.data));
     })
@@ -55,7 +57,7 @@ export const fetchLikeFood = (userId) => (dispatch) => {
 
 export const fetchRecent = (userId) => (dispatch) => {
   axios
-    .get(`http://localhost:8001/food/recentList?userId=${userId}`)
+    .get(`${serverUrl}/food/recentList?userId=${userId}`)
     .then((res) => {
       dispatch(initRecent(res.data));
     })

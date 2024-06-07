@@ -5,7 +5,6 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RouletteModal from "./RouletteModal";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -188,13 +187,7 @@ const Roulette = () => {
       <Link data-aos="zoom-out" to={"/foodRecommend"} className="category">
         카테고리 선택하러 가기
       </Link>
-      {showModal && (
-        <RouletteModal
-          // className={showModal ? "" : "close"}
-          result={result}
-          reSpin={reSpin}
-        />
-      )}
+      {showModal && <RouletteModal result={result} reSpin={reSpin} />}
     </RouletteBlock>
   );
 };
