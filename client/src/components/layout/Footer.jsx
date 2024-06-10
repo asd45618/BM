@@ -104,7 +104,9 @@ const Footer = () => {
       <div className="footer__wrap">
         <div className="footer__firstSection">
           <h1 className="footer__logo">
-            <img src={Logoimage} alt="" />
+            <Link to="/">
+              <img src={Logoimage} alt="" />
+            </Link>
           </h1>
           <div className="footer__famailySite">
             <Dropdown>
@@ -156,16 +158,16 @@ const Footer = () => {
         <div className="footer__secondSection">
           <ul className="footer__list">
             <li>
-              <Link to="/">회사소개</Link>
+              <Link to="/aboutus">회사소개</Link>
             </li>
             <li>
-              <Link to="/">서비스</Link>
+              <Link to="/service">서비스</Link>
             </li>
             <li>
-              <Link to="/">오시는길</Link>
+              <Link to="/way">오시는길</Link>
             </li>
             <li>
-              <Link to="/">고객센터</Link>
+              <a href="tel:1600-0987">고객센터</a>
             </li>
           </ul>
         </div>
