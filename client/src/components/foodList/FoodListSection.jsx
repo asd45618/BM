@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Figure from "react-bootstrap/Figure";
 import axios from "axios";
-import { fetchLikeFood } from "../../store/food";
+import { fetchLikeFood, initFoods } from "../../store/food";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -17,6 +17,16 @@ const FoodListSectionBlock = styled.div`
   .h1__tag {
     text-align: center;
     color: var(--main);
+    .search {
+      text-align: right;
+      input {
+        border-bottom: 1px solid var(--main);
+        outline: none;
+      }
+      svg {
+        cursor: pointer;
+      }
+    }
   }
   .under__line {
     border-bottom: 2px solid var(--main);
@@ -101,10 +111,13 @@ const serverUrl = import.meta.env.VITE_API_URL;
 const FoodListSection = ({ category }) => {
   const dispatch = useDispatch();
   const navgiate = useNavigate();
+  const params = useParams();
 
   const list = useSelector((state) => state.foods.food);
   const user = useSelector((state) => state.members.user);
   const like = useSelector((state) => state.foods.likeFood);
+
+  const [keyword, setKeyword] = useState("");
 
   const clickLikeBtn = (item) => {
     if (user) {
@@ -133,6 +146,25 @@ const FoodListSection = ({ category }) => {
     });
   };
 
+  const changeKeyword = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const activeEnter = (e) => {
+    if (e.key === "Enter") {
+      search();
+    }
+  };
+
+  const search = () => {
+    axios
+      .get(
+        `${serverUrl}/food/search?keyword=${keyword}&category=${params.foodId}`
+      )
+      .then((res) => dispatch(initFoods(res.data)))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     user ? dispatch(fetchLikeFood(user.userId)) : dispatch(fetchLikeFood(null));
   }, [user]);
@@ -147,6 +179,14 @@ const FoodListSection = ({ category }) => {
     <FoodListSectionBlock>
       <div className="h1__tag">
         <h1>{category}</h1>
+        <div className="search">
+          <input
+            type="text"
+            onChange={changeKeyword}
+            onKeyDown={(e) => activeEnter(e)}
+          />
+          <FontAwesomeIcon icon={faMagnifyingGlass} onClick={search} />
+        </div>
         <span className="under__line"></span>
       </div>
       <ul>

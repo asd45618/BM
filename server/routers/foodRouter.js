@@ -226,4 +226,38 @@ foodRouter.post("/recentSelectDelete", (req, res) => {
   });
 });
 
+foodRouter.get("/search", (req, res) => {
+  const keyword = req.query.keyword;
+  const category = req.query.category;
+  const searchKeyword = `%${keyword}%`;
+
+  if (category === "all") {
+    db.query(
+      "SELECT * FROM foodtbl WHERE fdName LIKE ?",
+      [searchKeyword, searchKeyword],
+      (err, result) => {
+        if (err) {
+          res.status(500).send("실패");
+          throw err;
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  } else {
+    db.query(
+      "SELECT * FROM foodtbl WHERE fdName LIKE ? AND fdCategory = ?",
+      [searchKeyword, category],
+      (err, result) => {
+        if (err) {
+          res.status(500).send("실패");
+          throw err;
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  }
+});
+
 export default foodRouter;
